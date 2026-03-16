@@ -1,0 +1,98 @@
+body {
+    scroll-behavior: smooth;
+}
+
+/* Animación para el despliegue de contenido */
+.details-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease, opacity 0.6s ease;
+  opacity: 0;
+}
+
+.details-content.open {
+  max-height: 10000px; /* suficiente para tu contenido */
+  opacity: 1;
+}
+
+/* Overlay para móvil */
+#sidebar-overlay {
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Scrollbar personalizado */
+#content-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+#content-sidebar::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 4px;
+}
+#content-sidebar::-webkit-scrollbar-track {
+    background-color: #f3f4f6;
+}
+
+
+/* =========================
+   ESTILOS DE IMPRESIÓN
+   ========================= */
+
+@media print {
+
+  /* Reset básico */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Mostrar siempre los detalles */
+  .details-content {
+    display: block !important;
+    height: auto !important;
+    max-height: none !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+  }
+
+  /* Ocultar botones interactivos */
+  button {
+    display: none !important;
+  }
+
+  /* Evitar que contenedores corten contenido */
+  .overflow-hidden {
+    overflow: visible !important;
+  }
+
+  /* Evitar problemas con fondos parallax */
+  .bg-fixed {
+    background-attachment: scroll !important;
+  }
+
+  /* Desactivar animaciones */
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Evitar cortes feos entre secciones */
+  section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Evitar que imágenes se corten */
+  img {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    max-width: 100%;
+  }
+
+  /* Quitar sombras para impresión */
+  .shadow-md,
+  .shadow-sm,
+  .shadow-lg {
+    box-shadow: none !important;
+  }
+
+}

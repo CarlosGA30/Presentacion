@@ -1,0 +1,58 @@
+<div class="mermaid" id="diagrama-estado">
+stateDiagram-v2
+    [*] --> EnEstacion1
+
+    state EnEstacion1 {
+        [*] --> Detenido
+        Detenido --> PuertasAbiertas : abrirPuertas()
+        PuertasAbiertas --> SubiendoPasajeros : subirGente()
+        SubiendoPasajeros --> BajandoPasajeros : bajarGente()
+        BajandoPasajeros --> PuertasCerradas : cerrarPuertas()
+        PuertasCerradas --> Avanzando : avanzar()
+    }
+
+    Avanzando --> EnEstacion2
+
+</div>
+
+<div class="mermaid" id="diagrama-estado-cafe">
+stateDiagram-v2
+    [*] --> Apagada
+
+    Apagada --> Encendida : presionarBotonEncendido()
+    
+    Encendida --> EsperandoSeleccion : encendidoCompleto()
+    
+    EsperandoSeleccion --> PreparandoCafe : seleccionarCafe()
+    EsperandoSeleccion --> Apagada : presionarBotonApagado()
+    
+    PreparandoCafe --> Sirviendo : cafeListo()
+    PreparandoCafe --> EsperandoSeleccion : errorPreparacion()
+    
+    Sirviendo --> EsperandoSeleccion : cafeServido()
+    
+    %% Estado de mantenimiento opcional
+    EsperandoSeleccion --> Mantenimiento : activarMantenimiento()
+    Mantenimiento --> EsperandoSeleccion : finalizarMantenimiento()
+
+</div>
+
+<!-- Usamos la versión de Mermaid que permite ejecución manual -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+
+<script>
+  // Función para inicializar cuando el script de Mermaid esté cargado
+  (function initDiagram() {
+    if (typeof mermaid !== 'undefined') {
+      mermaid.initialize({ startOnLoad: false }); // Desactivamos el auto-load
+      
+      // Forzamos el renderizado manual del contenido
+      mermaid.run({
+        nodes: document.getElementsByClassName('mermaid'),
+      });
+    } else {
+      // Si el script aún no carga, reintentamos en 100ms
+      setTimeout(initDiagram, 100);
+    }
+  })();
+</script>

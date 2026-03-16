@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estado de Objeto - Diseño de Software</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- NAVBAR SUPERIOR -->
+    <header id="global-navbar" class="w-full h-16 bg-white shadow-md flex items-center justify-between px-4 fixed top-0 left-0 z-50 border-b border-gray-200">
+        
+        <!-- Lado Izquierdo: Logo + Botón Hamburguesa (móvil) -->
+        <div class="flex items-center gap-3">
+            <!-- Botón Hamburguesa (solo visible en móvil) -->
+            <button id="menu-toggle-btn" class="lg:hidden p-2 rounded-md hover:bg-gray-100 text-gray-600">
+                <i class="bi bi-list text-2xl"></i>
+            </button>
+            
+            <!-- Logo -->
+            <div class="bg-blue-600 text-white p-2 rounded-lg">
+                <i class="bi bi-boxes text-xl"></i>
+            </div>
+            <h1 class="font-bold text-gray-800 text-lg hidden sm:block">System word</h1>
+        </div>
+
+        <!-- Menú de Navegación Superior -->
+        <nav class="flex items-center gap-1" id="navbar-menu">
+            <!-- Se inyecta con JS -->
+        </nav>
+    </header>
+
+    <div class="flex print:block min-h-screen pt-16">
+
+        <!-- Overlay para móvil (fondo oscuro cuando sidebar está abierto) -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
+
+        <!-- SIDEBAR IZQUIERDO (Temario) -->
+        <!-- Agregamos clases para transición y estado móvil -->
+        <aside id="content-sidebar" class="w-64 bg-white border-r border-gray-200 fixed left-0 top-16 h-[calc(100vh-4rem)] overflow-y-auto z-40 transition-transform duration-300 transform -translate-x-full lg:translate-x-0 lg:block">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-6 lg:hidden">
+                    <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Contenido</h2>
+                    <!-- Botón cerrar (solo móvil) -->
+                    <button id="sidebar-close-btn" class="p-2 hover:bg-gray-100 rounded-md">
+                        <i class="bi bi-x-lg text-gray-500"></i>
+                    </button>
+                </div>
+                <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6 hidden lg:block">Contenido</h2>
+                <ul id="menu-list" class="space-y-1"></ul>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="flex-1 w-full lg:ml-64 transition-all duration-300">
+                        <!-- Columna Derecha: QR (Solo en la primera sección de la página) -->
+            <section class="relative bg-gradient-to-r from-blue-400 via-purple-350 to-pink-300 text-white overflow-hidden">
+                <!-- Fondo con efecto parallax -->
+                <div class="absolute inset-0 bg-fixed bg-cover bg-center opacity-30" 
+                    style="background-image: url('assets/index-paralax.jpg');">
+                </div>
+
+                <!-- Contenido -->
+                <div class="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center py-52 px-8">
+                    
+                    <!-- Columna Izquierda: Presentación -->
+                    <div class="space-y-6 animate-fadeInUp">
+                        <h2 class="text-5xl md:text-6xl font-extrabold leading-tight drop-shadow-lg">
+                            Bienvenido el equipo <span class="text-yellow-300">System Word</span>
+                        </h2>
+                        <p class="text-lg md:text-xl text-gray-100 max-w-lg">
+                            Exploraremos el estado de los objetos, la arquitectura y el diseño de software con un enfoque moderno y dinámico. 
+                            Descubre información clara, organizada y fácil de compartir.
+                        </p>
+                        <a href="#app-content" 
+                        class="inline-block px-8 py-4 bg-yellow-100 text-gray-900 font-bold rounded-lg shadow-lg hover:scale-105 transform transition">
+                            🚀 Comenzemos
+                        </a>
+                    </div>
+
+                    <!-- Columna Derecha: QR -->
+                    <div class="flex justify-center md:justify-end animate-fadeInRight">
+                        <div class="bg-white p-8 rounded-2xl shadow-2xl border border-gray-200 text-center transform hover:rotate-1 hover:scale-105 transition">
+                            <h4 class="font-bold text-gray-800 mb-3 text-sm">Compartir</h4>
+                            <div id="qr-container" class="flex justify-center mb-3"></div>
+                            <p class="text-xs text-gray-500">Escanea para abrir esta página</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="p-8">
+            </div>
+
+            <div id="app-content" class="mt-3">
+                <!-- Contenido dinámico -->
+            </div>
+
+
+
+        </main>
+    </div>
+    <!-- Usamos la versión de Mermaid que permite ejecución manual -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+
+    <!-- Scripts -->
+    <script type="module" src="js/informacion.js"></script>
+    <script type="module" src="js/qr.js"></script>
+    <script type="module" src="js/sidebar.js"></script>
+    <script type="module" src="js/menu.js"></script>
+    <script type="module" src="js/renderer.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <!-- Script para toggle del menú móvil -->
+    <script type="module" src="js/mobile-menu.js"></script>
+
+
+
+
+</body>
+</html>

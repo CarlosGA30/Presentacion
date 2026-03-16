@@ -1,0 +1,66 @@
+#puzzle {
+    border: 2px solid #e5e7eb;
+    padding: 10px;
+    background: #f9fafb;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.puzzleSquare {
+    width: 35px;
+    height: 35px;
+    text-transform: uppercase;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    margin: 1px;
+    transition: all 0.2s;
+}
+
+/* Color cuando arrastras el mouse */
+.puzzleSquare.selected {
+    background-color: #3b82f6 !important;
+    color: white !important;
+}
+
+/* Color cuando la palabra ya se encontró */
+.puzzleSquare.found {
+    background-color: #10b981 !important;
+    color: white !important;
+}
+
+/* Estilo para tachar los conceptos encontrados */
+.wordFound {
+    text-decoration: line-through;
+    color: #10b981;
+    font-weight: bold;
+    opacity: 0.6;
+}
+
+#lista-conceptos li {
+    padding: 4px 0;
+    transition: all 0.3s;
+}
+.grid-board { 
+    display: grid; 
+    grid-template-columns: repeat(15, 35px); 
+    gap: 2px; 
+    background: #cbd5e1; 
+    padding: 5px; 
+    border-radius: 8px;
+    user-select: none; /* Evita seleccionar texto al arrastrar */
+}
+.cell { 
+    width: 35px; height: 35px; background: white; 
+    display: flex; align-items: center; justify-content: center; 
+    font-weight: bold; cursor: pointer; font-family: monospace; font-size: 1.1rem; 
+}
+.cell.selected { background: #facc15; color: black; }
+.cell.found { background: #10b981 !important; color: white !important; }
+.concept-done { text-decoration: line-through; color: #10b981; font-weight: bold; opacity: 0.6; }
