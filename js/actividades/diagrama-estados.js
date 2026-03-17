@@ -145,7 +145,7 @@ function preguntaAccionEstado(){
 // ESTADO DEL JUEGO
 // ===============================
 let tiempo = 60, puntaje = 0, errores = 0, racha = 0, rachaMaxima = 0;
-let tiempo_espera = 5
+let tiempo_espera = 1
 let preguntaActual = null, timer = null, juegoActivo = false;
 const TIEMPO_BASE = 60; // 1 minuto
 
@@ -158,7 +158,7 @@ function actualizarTiempo(){
         tiempo -= tiempo_espera;
     } else if (tiempo === 10) {
         // En 10 segundos: resta 2 segundos
-        tiempo_espera = 2
+        tiempo_espera = 1
         tiempo -= tiempo_espera;
 
     } else {
@@ -168,7 +168,7 @@ function actualizarTiempo(){
     }
     if (tiempo < 0) {
         tiempo = 0
-        tiempo_espera = 5;
+        tiempo_espera = 1;
     };
 }
 
@@ -344,7 +344,9 @@ function mostrarPregunta(p){
         cont.appendChild(btn);
     });
 }
-
+function cerrarModalFin(){
+    document.getElementById("modal-fin-juego").classList.add("invisible");
+}
 // Inicializar display
 actualizarDisplay();
 actualizarBarraTiempo();

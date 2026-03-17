@@ -7,7 +7,7 @@ let selectedCells = [];
 let foundCount = 0;
 
 // 1. Generar Grid
-function buildGrid() {
+function buildGrid(data) {
     data.forEach(item => {
         let placed = false;
         while (!placed) {
@@ -35,7 +35,7 @@ function buildGrid() {
 }
 
 // 2. Renderizar Grid y pistas
-function render() {
+function render(data) {
     const gridDiv = document.getElementById('grid');
     const cluesUl = document.getElementById('clues');
     document.getElementById('total').innerText = data.length;
@@ -54,7 +54,7 @@ function render() {
         });
     });
 
-    window.onmouseup = () => { if (isDragging) validateSelection(); isDragging = false; };
+    window.onmouseup = () => { if (isDragging) validateSelection(data); isDragging = false; };
 
     data.forEach(item => {
         const li = document.createElement('li');
@@ -93,7 +93,7 @@ function selectCell(el) {
     selectedCells = [el];
 }
 
-function validateSelection() {
+function validateSelection(data) {
     let word = selectedCells.map(c => c.textContent).join("");
     let reversed = word.split("").reverse().join("");
     
@@ -112,6 +112,7 @@ function validateSelection() {
     selectedCells = [];
 }
 function initSopaLetras(wordData){
+    const data=[...wordData]
 
     // reset estado
     data.length = 0
@@ -123,7 +124,7 @@ function initSopaLetras(wordData){
 
     document.getElementById("score").textContent = 0
 
-    buildGrid()
-    render()
+    buildGrid(data)
+    render(data)
 
 }
