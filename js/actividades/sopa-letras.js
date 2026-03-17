@@ -1,4 +1,3 @@
-
 const SIZE = 20;
 let grid = Array(SIZE).fill().map(() => Array(SIZE).fill(''));
 let isDragging = false;
@@ -34,11 +33,15 @@ function buildGrid(data) {
     }
 }
 
-// 2. Renderizar Grid y pistas
+// 2. Renderizar Grid y pistas con soporte táctil
 function render(data) {
     const gridDiv = document.getElementById('grid');
     const cluesUl = document.getElementById('clues');
     document.getElementById('total').innerText = data.length;
+
+    // Limpia grid y pistas
+    gridDiv.innerHTML = '';
+    cluesUl.innerHTML = '';
 
     grid.forEach((row, r) => {
         row.forEach((letter, c) => {
@@ -48,14 +51,49 @@ function render(data) {
             cell.dataset.r = r;
             cell.dataset.c = c;
 
-            cell.onmousedown = () => { isDragging = true; startCell = {r, c}; selectCell(cell); };
-            cell.onmouseenter = () => { if (isDragging) updateSelection({r, c}); };
+            // --- Desktop ---
+            cell.onmousedown = () => { 
+                isDragging = true; 
+                startCell = {r, c}; 
+                selectCell(cell); 
+            };
+            cell.onmouseenter = () => { 
+                if (isDragging) updateSelection({r, c}); 
+            };
+
+            // --- Mobile touch ---
+            cell.ontouchstart = (e) => {
+                e.preventDefault(); // evita scroll
+                isDragging = true;
+                startCell = {r, c};
+                selectCell(cell);
+            };
+            cell.ontouchmove = (e) => {
+                e.preventDefault(); // evita scroll
+                const touch = e.touches[0];
+                const el = document.elementFromPoint(touch.clientX, touch.clientY);
+                if (el && el.classList.contains('cell')) {
+                    const r2 = parseInt(el.dataset.r);
+                    const c2 = parseInt(el.dataset.c);
+                    updateSelection({r: r2, c: c2});
+                }
+            };
+
             gridDiv.appendChild(cell);
         });
     });
 
-    window.onmouseup = () => { if (isDragging) validateSelection(data); isDragging = false; };
+    // Terminar selección
+    window.onmouseup = () => { 
+        if (isDragging) validateSelection(data); 
+        isDragging = false; 
+    };
+    window.ontouchend = () => { 
+        if (isDragging) validateSelection(data); 
+        isDragging = false; 
+    };
 
+    // Renderizar pistas
     data.forEach(item => {
         const li = document.createElement('li');
         li.id = `hint-${item.word}`;
@@ -104,27 +142,26 @@ function validateSelection(data) {
             c.classList.remove('selected');
             c.classList.add('found');
         });
-        document.getElementById(`hint-${foundMatch.word}`).classList.add('concept-done');
+        const hintEl = document.getElementById(`hint-${foundMatch.word}`);
+        if (hintEl) hintEl.classList.add('concept-done');
         document.getElementById('score').innerText = ++foundCount;
     } else {
         selectedCells.forEach(c => c.classList.remove('selected'));
     }
     selectedCells = [];
 }
+
+// Inicializar sopa de letras
 function initSopaLetras(wordData){
-    const data=[...wordData]
+    const data = [...wordData];
 
     // reset estado
-    data.length = 0
-    wordData.forEach(w => data.push(w))
+    foundCount = 0;
+    selectedCells = [];
+    startCell = null;
+    document.getElementById("score").textContent = 0;
 
-    foundCount = 0
-    selectedCells = []
-    startCell = null
-
-    document.getElementById("score").textContent = 0
-
-    buildGrid(data)
-    render(data)
-
+    grid = Array(SIZE).fill().map(() => Array(SIZE).fill('')); // reset grid
+    buildGrid(data);
+    render(data);
 }
