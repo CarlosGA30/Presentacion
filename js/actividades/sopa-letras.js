@@ -1,14 +1,5 @@
-const data = [
-    { word: "SINGLETON", hint: "Instancia única de una clase." },
-    { word: "STATE", hint: "Cambia comportamiento según el estado." },
-    { word: "TRANSICION", hint: "Paso de un estado a otro." },
-    { word: "FSM", hint: "Máquina de estados finitos." },
-    { word: "CICLODEVIDA", hint: "Etapas de un objeto." },
-    { word: "NULLOBJECT", hint: "Objeto que representa la ausencia de valor." },
-    { word: "FLYWEIGHT", hint: "Comparte estados para ahorrar memoria." }
-];
 
-const SIZE = 15;
+const SIZE = 20;
 let grid = Array(SIZE).fill().map(() => Array(SIZE).fill(''));
 let isDragging = false;
 let startCell = null;
