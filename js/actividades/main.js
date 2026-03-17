@@ -1,7 +1,7 @@
 const actividades = [
   { titulo: "Completa la sopa de letras.", descripcion: "Completa la sopa de letras.", icono: "bi-pen", archivo: "./actividades/sopa-letras.html" },
   { titulo: "Diagrama de estados", descripcion: "Aprende del diagrama.", icono: "bi-diagram-3", archivo: "./actividades/diagrama-estados.html" },
-  { titulo: "Refactorización", descripcion: "Refactoriza usando State.", icono: "bi-code-slash", archivo: "./actividades/refactorizacion.html" }
+  { titulo: "Refactorización", descripcion: "La Refactoriza de codigo y clases aun no esta disponibe", icono: "bi-code-slash", archivo: "./actividades/refactorizacion.html" }
 ];
 
 const carousel = document.getElementById("carousel");
