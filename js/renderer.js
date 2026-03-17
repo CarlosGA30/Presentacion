@@ -101,7 +101,7 @@ export function renderContent(dataList, container, isNested = false, globalIndex
         let globalIdx = globalIndex + localIndex;
 
         // Contenedor principal de la sección
-        let div_n = document.createElement('div');
+        let div_n = document.createElement('seccion');
         div_n.className = 'relative pb-10 pt-10';
         div_n.id = `secc-${item.id}`;
 
@@ -140,7 +140,7 @@ export function renderContent(dataList, container, isNested = false, globalIndex
                 <div class="flex-1 space-y-4">
                     <div>
                         <h2 class="text-3xl font-bold text-gray-900">${item.titulo}</h2>
-                        <p class="text-2xl text-blue-600 font-medium mt-1">${item.subtitulo || ''}</p>
+                        <p class="text-2xl text-blue-500 font-medium mt-1">${item.subtitulo || ''}</p>
                     </div>
                     ${btn_detalle}
                 </div>
@@ -152,59 +152,20 @@ export function renderContent(dataList, container, isNested = false, globalIndex
         if (item.datos?.data?.length) {
             detallesHTML = item.datos.data.map(e => {
                 let detalleMedia = '';
-                
-                if (e.img?.url) {
-                    const tipo = (e.img.tipo || 'IMAGEN').toUpperCase();
-                    const src = tipo === 'DIAGRAMA' ? e.img.mermaid : e.img.url;
-                    
-                    if (tipo === 'VIDEO') {
-                        const videoId = getYouTubeId(src);
-                        const thumbnail = videoId ? getYouTubeThumbnail(videoId) : 'assets/cargando.svg';
-                        detalleMedia = `
-                            <figure class="relative group rounded-lg overflow-hidden shadow-sm ring-1 ring-gray-200">
-                                <img src="${thumbnail}" 
-                                    class="w-full h-auto max-h-64 object-cover cursor-zoom-in"
-                                    onclick="openMediaModal('${encodeURIComponent(src)}', '${encodeURIComponent(item.titulo)}', 'VIDEO')"
-                                    onerror="this.parentElement.style.display='none'">
-                                <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors pointer-events-none">
-                                    <div class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                                        <i class="bi bi-play-fill text-2xl text-gray-800 ml-0.5"></i>
-                                    </div>
-                                </div>
-                                <button type="button" 
-                                        class="absolute top-2 right-2 z-20 bg-white/90 hover:bg-white text-gray-700 hover:text-blue-600 
-                                            rounded-full p-2 shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 
-                                            focus:ring-blue-400 opacity-0 group-hover:opacity-100"
-                                        onclick="event.stopPropagation(); openMediaModal('${encodeURIComponent(src)}', '${encodeURIComponent(item.titulo)}', 'VIDEO')"
-                                        aria-label="Ampliar"
-                                        title="Ampliar">
-                                    <i class="bi bi-arrows-fullscreen text-lg"></i>
-                                </button>
-                            </figure>
-                        `;
-                    } else {
-                        detalleMedia = `
-                            <figure class="relative group rounded-lg overflow-hidden shadow-sm ring-1 ring-gray-200">
-                                <img src="${src}" 
-                                    class="w-full h-auto max-h-64 object-cover cursor-zoom-in"
-                                    onclick="openMediaModal('${encodeURIComponent(src)}', '${encodeURIComponent(item.titulo)}', '${tipo}')"
-                                    onerror="this.parentElement.style.display='none'">
-                                <button type="button" 
-                                        class="absolute top-2 right-2 z-20 bg-white/90 hover:bg-white text-gray-700 hover:text-blue-600 
-                                            rounded-full p-2 shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 
-                                            focus:ring-blue-400 opacity-0 group-hover:opacity-100"
-                                        onclick="event.stopPropagation(); openMediaModal('${encodeURIComponent(src)}', '${encodeURIComponent(item.titulo)}', '${tipo}')"
-                                        aria-label="Ampliar"
-                                        title="Ampliar">
-                                    <i class="bi bi-arrows-fullscreen text-lg"></i>
-                                </button>
-                            </figure>
-                        `;
-                    }
+                if (e.img?.tipo) {
+                    const tipo = e.img.tipo.toUpperCase();
+                    const src = tipo === 'DIAGRAMA' ? e.img.mermaid : (e.img.url || 'assets/cargando.svg');
+                    detalleMedia = createMediaWithZoom(src, item.titulo, tipo);
                 }
+
+                let img_cont = detalleMedia ? `
+                    <div class="w-full md:w-1/3 h-48 md:h-64 rounded-lg overflow-hidden shrink-0 bg-gray-200 ring-1 ring-gray-200 relative">
+                        ${detalleMedia}
+                    </div>
+                ` : '';
                 
                 return `
-                <div class="md:col-span-3 space-y-6">
+                <div class="md:col-span-3 space-y-2">
                     <p class="text-gray-700 leading-relaxed text-2xl">${e.text || ''}</p>
                     ${detalleMedia}
                     <div id="subinfo-${item.id}" class="mt-8 space-y-6"></div>

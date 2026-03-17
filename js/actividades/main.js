@@ -1,6 +1,6 @@
 const actividades = [
-  { titulo: "Sopa de letras", descripcion: "Completa la sopa de letras.", icono: "bi-pen", archivo: "./actividades/sopa-letras.html" },
-  { titulo: "Diagrama de estados", descripcion: "Construye el diagrama.", icono: "bi-diagram-3", archivo: "./actividades/diagrama-estados.html" },
+  { titulo: "Completa la sopa de letras.", descripcion: "Completa la sopa de letras.", icono: "bi-pen", archivo: "./actividades/sopa-letras.html" },
+  { titulo: "Diagrama de estados", descripcion: "Aprende del diagrama.", icono: "bi-diagram-3", archivo: "./actividades/diagrama-estados.html" },
   { titulo: "Refactorización", descripcion: "Refactoriza usando State.", icono: "bi-code-slash", archivo: "./actividades/refactorizacion.html" }
 ];
 

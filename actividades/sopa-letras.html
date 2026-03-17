@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="../css/sopa-letras.css">
+<link rel="stylesheet" href="css/sopa-letras.css">
 
-<div class="max-w-5xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+<div class="max-w-8xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200">
 
     <h1 class="text-3xl font-bold mb-6 text-gray-800 border-b pb-4">
         Sopa de Letras
@@ -33,19 +33,29 @@
 
 </div>
 
-<script src="../js/actividades/sopa-letras.js"></script>
+<script src="js/actividades/sopa-letras.js"></script>
 
 <script>
 
 const data_sopa = [
-    { word: "SINGLETON", hint: "Instancia única de una clase." },
-    { word: "STATE", hint: "Cambia comportamiento según el estado." },
-    { word: "TRANSICION", hint: "Paso de un estado a otro." },
-    { word: "FSM", hint: "Máquina de estados finitos." },
-    { word: "CICLODEVIDA", hint: "Etapas de un objeto." },
-    { word: "NULLOBJECT", hint: "Objeto que representa la ausencia de valor." },
-    { word: "FLYWEIGHT", hint: "Comparte estados para ahorrar memoria." }
-]
+    { word: "ESTADOCONCRETO", hint: "Combinación específica de valores de los atributos de un objeto en un instante dado." },
+    { word: "ESTADOABSTRACTO", hint: "Agrupación lógica de estados concretos que comparten un significado en el dominio del problema." },
+    { word: "CICLODEVIDA", hint: "Secuencia de estados por los que atraviesa un objeto desde su creación hasta su destrucción." },
+    { word: "ENCAPSULAMIENTO", hint: "Principio que oculta los atributos de un objeto y solo permite acceder a ellos mediante métodos públicos." },
+    { word: "DIAGRAMADEESTADOS", hint: "Representación UML que muestra los estados posibles de un objeto y las transiciones entre ellos." },
+    { word: "TRANSICION", hint: "Cambio de un estado a otro en respuesta a un evento." },
+    { word: "NULLOBJECT", hint: "Patrón que proporciona un objeto con comportamiento neutro para evitar referencias nulas." },
+    { word: "SINGLETON", hint: "Patrón que garantiza una única instancia de una clase." },
+    { word: "FLYWEIGHT", hint: "Patrón que comparte estados intrínsecos entre múltiples objetos para ahorrar memoria." },
+    { word: "STATE", hint: "Patrón que permite a un objeto alterar su comportamiento cuando cambia su estado interno." },
+    { word: "RESULT", hint: "Patrón que encapsula el éxito o fracaso de una operación como un objeto." },
+    { word: "FSM", hint: "Máquina de Estados Finita, modelo formal de estados y transiciones." },
+    { word: "ANTIPATRON", hint: "Práctica común que parece beneficiosa pero que conduce a problemas en el desarrollo." },
+    { word: "CACHEDEESTADO", hint: "Anti-patrón que consiste en guardar copias locales de estados ajenos, provocando desincronización." },
+    { word: "OBSESIONPRIMITIVA", hint: "Anti-patrón que usa tipos básicos para representar conceptos de negocio en lugar de objetos específicos." },
+    { word: "ESTADOGLOBAL", hint: "Anti-patrón que permite el acceso libre al estado desde cualquier parte del código, rompiendo encapsulamiento." }
+];
+
 
 initSopaLetras(data_sopa)
 

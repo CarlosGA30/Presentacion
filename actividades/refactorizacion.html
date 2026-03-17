@@ -1,18 +1,24 @@
+<div style="margin: 300px;">
 <div class="mermaid" id="diagrama-estado">
 stateDiagram-v2
-    [*] --> EnEstacion1
+[inicio] --> Apagada : iniciarSistema()
+Apagada --> Encendida : presionarBotonEncendido() / iniciarComponentes()
+Encendida --> EsperandoSeleccion : encendidoCompleto() / mostrarMenu()
 
-    state EnEstacion1 {
-        [*] --> Detenido
-        Detenido --> PuertasAbiertas : abrirPuertas()
-        PuertasAbiertas --> SubiendoPasajeros : subirGente()
-        SubiendoPasajeros --> BajandoPasajeros : bajarGente()
-        BajandoPasajeros --> PuertasCerradas : cerrarPuertas()
-        PuertasCerradas --> Avanzando : avanzar()
-    }
+EsperandoSeleccion --> PreparandoCafe : seleccionarCafe() [hayAgua && hayCafe] / iniciarPreparacion()
 
-    Avanzando --> EnEstacion2
+EsperandoSeleccion --> Apagada : presionarBotonApagado() / apagarSistema()
 
+EsperandoSeleccion --> Mantenimiento : activarMantenimiento() [modoTecnico] / bloquearUso()
+
+PreparandoCafe --> Sirviendo : cafeListo() / dispensarCafe()
+
+PreparandoCafe --> EsperandoSeleccion : errorPreparacion() / mostrarError()
+
+Sirviendo --> EsperandoSeleccion : cafeServido() / limpiarSistema()
+
+Mantenimiento --> EsperandoSeleccion : finalizarMantenimiento() / habilitarUso()
+Apagada --> [apagado] : sistemaDesconectado()
 </div>
 
 <div class="mermaid" id="diagrama-estado-cafe">
@@ -36,6 +42,348 @@ stateDiagram-v2
     Mantenimiento --> EsperandoSeleccion : finalizarMantenimiento()
 
 </div>
+
+<div class="mermaid m-20">
+classDiagram
+    class Context{
+        -state: State
+        +request()
+        +setState(state: State)
+    }
+    
+    class State~interface~{
+        
+        +handle(context: Context)*
+    }
+    
+    class ConcreteStateA{
+        +handle(context: Context)
+    }
+    
+    class ConcreteStateB{
+        +handle(context: Context)
+    }
+    
+    Context --> State : delega
+    State <|-- ConcreteStateA
+    State <|-- ConcreteStateB
+    note for Context "Mantiene referencia al estado actual
+y delega las peticiones"
+    note for State "Interfaz común para todos
+los estados concretos"
+</div>
+
+<div class="mermaid m-20">
+classDiagram
+    class Singleton{
+        -static instance: Singleton
+        -Singleton()
+        +static getInstance(): Singleton
+        +businessLogic()
+        +resetInstance()
+    }
+    
+    note for Singleton "✅ Garantiza una única instancia
+✅ Acceso global controlado
+✅ Lazy initialization"
+    class Client{
+        +operation()
+    }
+    Client ..> Singleton : usa
+</div>
+<div class="mermaid m-20">
+classDiagram
+    class Client{
+        +doSomething(obj: AbstractObject)
+    }
+    
+    class AbstractObject ~interface~{
+        +request()*
+        +getName(): String
+        +isValid(): boolean
+    }
+    
+    class RealObject{
+        -name: String
+        +request()
+        +getName(): String
+        +isValid(): boolean
+    }
+    
+    class NullObject{
+        +request()
+        +getName(): String
+        +isValid(): boolean
+    }
+    
+    Client --> AbstractObject : depende
+    AbstractObject <|-- RealObject
+    AbstractObject <|-- NullObject
+    note for NullObject "🔄 Implementación neutra
+🚫 Sin efectos secundarios
+✅ Evita chequeos null"
+</div>
+<div class="mermaid m-20">
+classDiagram
+    class Client{
+        +process(): Result
+    }
+    
+    class Result ~interface~{
+        +isSuccess(): boolean*
+        +isFailure(): boolean*
+        +getValue(): T*
+        +getError(): Error*
+        +map(fn): Result*
+        +flatMap(fn): Result*
+    }
+    
+    class Success{
+        +value: T
+        +isSuccess(): boolean
+        +getValue(): T
+        +map(fn): Result
+        +flatMap(fn): Result
+    }
+    
+    class Failure{
+        +error: Error
+        +isFailure(): boolean
+        +getError(): Error
+        +map(fn): Result
+        +flatMap(fn): Result
+    }
+    
+    Client --> Result : retorna
+    Result <|-- Success
+    Result <|-- Failure
+    note for Result "🎯 Manejo funcional de errores
+🔗 Encadenamiento seguro
+🚫 Sin excepciones"
+</div>
+<div class="mermaid m-20">
+stateDiagram-v2
+  [*] --> EstadoInicial
+  EstadoInicial --> EstadoProcesando : evento
+  EstadoProcesando --> EstadoFinal : completar
+  EstadoProcesando --> EstadoError : fallo
+  EstadoError --> EstadoInicial : reiniciar
+
+
+</div>
+
+<div class="mermaid m-20">
+classDiagram
+    class Client {
+        +operation()
+    }
+
+    class FlyweightFactory {
+        -flyweights: Map
+        +getFlyweight(key): Flyweight
+        +count(): int
+    }
+
+    class Flyweight {
+        ~interface~
+        +operation(extrinsicState)*
+    }
+
+    class ConcreteFlyweight {
+        -intrinsicState
+        +operation(extrinsicState)
+    }
+
+    class UnsharedConcreteFlyweight {
+        -allState
+        +operation(extrinsicState)
+    }
+
+    Client --> FlyweightFactory : solicita instancia
+    Client --> Flyweight : usa con estado externo
+    FlyweightFactory --> Flyweight : gestiona/cacha
+    Flyweight <|-- ConcreteFlyweight
+    Flyweight <|-- UnsharedConcreteFlyweight
+
+    note for Flyweight "Interfaz común
+Operaciones con estado extrínseco"
+    
+    note for ConcreteFlyweight "✅ Estado Intrínseco:
+Inmutable y compartido
+(Ej: Tipo de árbol, Textura)"
+    
+    note for Client "❗ Estado Extrínseco:
+Variable y NO compartido
+(Ej: Coordenadas X,Y, Color actual)
+El cliente lo pasa en cada llamada"
+    
+    note for FlyweightFactory "🏭 Fábrica de Objetos
+Garantiza que los Flyweights
+se compartan eficientemente"
+    
+    note for UnsharedConcreteFlyweight "Opcional: Para objetos
+que NO pueden compartirse"
+</div>
+
+<div class="bg-black"> espacio</div>
+
+
+<div class="mermaid m-20">
+classDiagram
+    class SistemaCentral{
+        +estadoReal: Data
+        +actualizarEstado()
+        +notificarCambios()
+    }
+
+    class ComponenteA{
+        +cacheLocal: Data
+        +leerDatos()
+        #sincronizar()
+    }
+
+    class ComponenteB{
+        +cacheLocal: Data
+        +leerDatos()
+        #sincronizar()
+    }
+
+    class ComponenteC{
+        +cacheLocal: Data
+        +leerDatos()
+        #sincronizar()
+    }
+
+    SistemaCentral ..> ComponenteA : sin notificacion
+    SistemaCentral ..> ComponenteB : sin notificacion
+    SistemaCentral ..> ComponenteC : sin notificacion
+
+    note for ComponenteA "ANTI-PATRON
+Mantiene copia local desactualizada
+Si el central cambia aqui hay basura"
+    note for ComponenteB "ANTI-PATRON
+Duplicidad de fuente de verdad"
+    note for ComponenteC "ANTI-PATRON
+Requiere polling o sincronizacion manual costosa"
+
+    note for SistemaCentral "SOLUCION
+Implementar patron Observer o consultas directas"
+</div>
+
+
+<div class="mermaid m-20">
+classDiagram
+
+    class Cliente{
+        +procesar(objeto)
+    }
+
+    class Servicio{
+        +obtenerDatos(id)
+    }
+
+    class LogicaNegocio{
+        +ejecutar()
+    }
+
+    Cliente --> Servicio : llama
+    Servicio ..> LogicaNegocio : retorna null si falla
+
+    note for Cliente "ANTI-PATRON
+if(obj!=null){
+ if(obj.prop!=null){...}}
+Codigo anidado fragil"
+
+    note for Servicio "ANTI-PATRON
+Retorna null silenciosamente en lugar de objeto valido"
+
+    note for LogicaNegocio "RIESGO
+NullPointerException en runtime"
+
+</div>
+
+
+<div class="mermaid m-20">
+classDiagram
+
+    class GlobalState{
+        +static datos: Map
+        +static config: String
+        +static usuario: User
+    }
+
+    class ModuloA{
+        +iniciar()
+    }
+
+    class ModuloB{
+        +procesar()
+    }
+
+    class ModuloC{
+        +guardar()
+    }
+
+    class UtilidadX{
+        +helper()
+    }
+
+    ModuloA ..> GlobalState : modifica
+    ModuloB ..> GlobalState : modifica
+    ModuloC ..> GlobalState : modifica
+    UtilidadX ..> GlobalState : modifica
+
+    note for GlobalState "ANTI-PATRON
+Estado global cualquiera puede cambiarlo"
+
+    note for ModuloA "Efecto
+Dependencia oculta"
+    note for ModuloB "Efecto
+Dificil de testear"
+    note for ModuloC "Efecto
+Race conditions"
+
+</div>
+
+
+<div class="mermaid m-20">
+classDiagram
+
+    class Usuario{
+        +id: int
+        +telefono: String
+        +estado: String
+        +tipoUsuario: int
+    }
+
+    class Validador{
+        +validarTelefono(tel: String)
+        +validarEstado(est: String)
+        +validarTipo(tipo: int)
+    }
+
+    class Controlador{
+        +registrar(id,tel,est,tipo)
+    }
+
+    Controlador --> Usuario : crea
+    Controlador --> Validador : valida
+
+    note for Usuario "ANTI-PATRON
+Obsesion primitiva
+String telefono permite hola
+int tipo permite -999"
+
+    note for Validador "Sintoma
+Logica de negocio dispersa en utilidades"
+
+    note for Controlador "Riesgo
+Estados invalidos en el sistema"
+
+</div>
+
+</div>
+
 
 <!-- Usamos la versión de Mermaid que permite ejecución manual -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>

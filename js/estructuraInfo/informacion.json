@@ -8,7 +8,9 @@
       "url": "assets/main/introduccion.jpg"
     },
     "contenido": {
-      "data": [{"text": "El estado de un objeto es el concepto central que nos enfocaremos ya que define la condición de un objeto en un momento dado a través de los valores de sus atributos, y determina cómo responde a los eventos del sistema. Un diseño robusto del estado evita comportamientos inesperados, fugas de memoria y vulnerabilidades de seguridad.\n\nSe explicarán los fundamentos básicos del estado de un objeto dentro de la programación orientada a objetos, mostrando ejemplos simples de cómo cambia el estado durante la ejecución de un programa y por qué es importante para el desarrollo de software."}]    
+      "data": [{"text": "El estado de un objeto es el concepto central que nos enfocaremos ya que define la condición de un objeto en un momento dado a través de los valores de sus atributos, y determina cómo responde a los eventos del sistema. Un diseño robusto del estado evita comportamientos inesperados, fugas de memoria y vulnerabilidades de seguridad."},
+        {"text": ""},
+        {"text": "Se explicarán los fundamentos básicos del estado de un objeto dentro de la programación orientada a objetos, mostrando ejemplos simples de cómo cambia el estado durante la ejecución de un programa y por qué es importante para el desarrollo de software."}]    
     }
   },
   {
@@ -20,7 +22,8 @@
       "url": "assets/main/fundamentos.jpg"
     },
     "contenido": {
-      "data": [{"text": "Los fundamentos del estado de objeto permiten comprender cómo se representan los datos dentro de un objeto y cómo estos influyen en su comportamiento."}],      "subinfo": [
+      "data": [{"text": "Los fundamentos del estado de objeto permiten comprender cómo se representan los datos dentro de un objeto y cómo estos influyen en su comportamiento."}],
+      "subinfo": [
         {
           "id": 21,
           "titulo": "2.1. ¿Qué es un objeto?",
@@ -30,7 +33,9 @@
             "url": "assets/main/fundamentos/que-es-objeto.png"
           },
           "contenido": {
-            "data": [{"text": "En el paradigma orientado a objetos, un objeto es una entidad que combina estado (datos) y comportamiento (operaciones). Según Bruegge y Dutoit (2002), los objetos se identifican durante el diseño para responder a los requisitos del proyecto; pueden representar entidades del mundo real (como un cliente o un producto) o conceptos técnicos del sistema (como servicios o controladores).\nCada objeto tiene una identidad única, un estado definido por sus atributos y un comportamiento expresado a través de sus métodos. La correcta identificación de objetos es el punto de partida para construir una solución de software sólida y mantenible."}],            "subinfo": []
+            "data": [{"text": "En el paradigma orientado a objetos, un objeto es una entidad que combina estado (datos) y comportamiento (operaciones). Según Bruegge y Dutoit (2002), los objetos se identifican durante el diseño para responder a los requisitos del proyecto; pueden representar entidades del mundo real (como un cliente o un producto) o conceptos técnicos del sistema (como servicios o controladores)."},
+        {"text": "Cada objeto tiene una identidad única, un estado definido por sus atributos y un comportamiento expresado a través de sus métodos. La correcta identificación de objetos es el punto de partida para construir una solución de software sólida y mantenible."}],
+            "subinfo": []
           }
         },
         {
@@ -42,7 +47,11 @@
             "url": "assets/main/fundamentos/que-es-estado.jpg"
           },
           "contenido": {
-            "data": [{"text": "Aunque el estado de un objeto se define como la colección de valores de sus atributos en un momento determinado (Robillard, 2019), en el diseño orientado a objetos se introduce la distinción entre dos tipos de estado: estado concreto y estado abstracto.\n- Estado concreto: es la combinación real de valores que poseen los atributos de un objeto en un instante determinado. El número de estados concretos puede ser extremadamente grande (por ejemplo, un objeto con un solo atributo de tipo int puede tener 2³² estados posibles, lo que hace poco viable su uso directo como herramienta de diseñola combinación real de valores en un instante, el número de estados concretos puede ser astronómicamente grande (por ejemplo, un objeto con un solo atributo de tipo int tiene 2³² estados posibles), lo que hace poco viable o practico como herramienta en el diseño .\n- Estado abstracto: Es una agrupación lógica de estados concretos que comparten un significado o una respuesta común dentro del dominio del problema . En lugar de modelar cada valor numérico posible, se definen estados como \"Aprobatorio\" o \"Reprobatorio\" para una calificación . Esta abstracción es la que utilizan los diseñadores para razonar sobre el comportamiento del objeto.\n"}],            "subinfo": []
+            "data": [{"text": "Aunque el estado de un objeto se define como la colección de valores de sus atributos en un momento determinado, en el diseño orientado a objetos se introduce la distinción entre dos tipos de estado: estado concreto y estado abstracto."},
+        {"text": "- Estado concreto: es la combinación real de valores que poseen los atributos de un objeto en un instante determinado. El número de estados concretos puede ser extremadamente grande (por ejemplo, un objeto con un solo atributo de tipo int puede tener 2³² estados posibles, lo que hace poco viable su uso directo como herramienta de diseñola combinación real de valores en un instante, el número de estados concretos puede ser astronómicamente grande (por ejemplo, un objeto con un solo atributo de tipo int tiene 2³² estados posibles), lo que hace poco viable o practico como herramienta en el diseño ."},
+        {"text": "- Estado abstracto: Es una agrupación lógica de estados concretos que comparten un significado o una respuesta común dentro del dominio del problema . En lugar de modelar cada valor numérico posible, se definen estados como \"Aprobatorio\" o \"Reprobatorio\" para una calificación . Esta abstracción es la que utilizan los diseñadores para razonar sobre el comportamiento del objeto."},
+        {"text": ""}],
+            "subinfo": []
           }
         },
         {
@@ -54,19 +63,34 @@
             "url": "assets/main/fundamentos/estado-cambio.jpg"
           },
           "contenido": {
-            "data": [{"text": "El cambio de estado de un objeto ocurre cuando se modifican los valores de sus atributos. Esto generalmente sucede como resultado de: la invocación de métodos del propio objeto, la interacción con otros objetos, o la dependencia de variables externas o del entorno del sistema.\nLa sucesión de estos cambios define el ciclo de vida del objeto (Robillard, 2019). De manera general, este ciclo incluye las siguientes etapas:  Instanciación El objeto es creado y adquiere un estado inicial, determinado por los valores iniciales de sus atributos.\n Transiciones de estado Durante su ejecución, el objeto puede cambiar de estado como resultado de eventos o interacciones con otros objetos. Cada transición implica una modificación en uno o más atributos del objeto.\n Estado final Eventualmente el objeto alcanza un estado final, a partir del cual deja de participar en la ejecución del sistema y se convierte en candidato para ser eliminado por el recolector de memoria.\n Un problema importante de diseño ocurre cuando un objeto termina en un estado no definido, es decir, un estado para el cual no se especificó comportamiento dentro del diseño del sistema. Este tipo de situaciones puede provocar diversos problemas, como:  fugas de memoria, pérdida de rendimiento, vulnerabilidades de seguridad, o errores de ejecución cuando el objeto todavía debería cumplir un rol dentro del sistema (Robillard, 2019).\n Por esta razón, durante el diseño del ciclo de vida de un objeto es fundamental definir claramente los estados válidos y las transiciones permitidas entre ellos.\n Relación con la comparación de estados\n\nDado que el comportamiento de un objeto depende de su estado, en muchas situaciones resulta necesario comparar objetos para determinar si se encuentran en el mismo estado o en estados equivalentes. Esta necesidad aparece, por ejemplo, cuando se desea verificar si dos objetos representan la misma información o si pueden considerarse funcionalmente equivalentes dentro del sistema."}],            "subinfo": []
+            "data": [{"text": "El cambio de estado de un objeto ocurre cuando se modifican los valores de sus atributos. Esto generalmente sucede como resultado de: la invocación de métodos del propio objeto, la interacción con otros objetos, o la dependencia de variables externas o del entorno del sistema."},
+        {"text": "La sucesión de estos cambios define el ciclo de vida del objeto. De manera general, este ciclo incluye las siguientes etapas:  Instanciación El objeto es creado y adquiere un estado inicial, determinado por los valores iniciales de sus atributos."},
+        {"text": " Transiciones de estado Durante su ejecución, el objeto puede cambiar de estado como resultado de eventos o interacciones con otros objetos. Cada transición implica una modificación en uno o más atributos del objeto."},
+        {"text": " Estado final Eventualmente el objeto alcanza un estado final, a partir del cual deja de participar en la ejecución del sistema y se convierte en candidato para ser eliminado por el recolector de memoria."},
+        {"text": " Un problema importante de diseño ocurre cuando un objeto termina en un estado no definido, es decir, un estado para el cual no se especificó comportamiento dentro del diseño del sistema. Este tipo de situaciones puede provocar diversos problemas, como:  fugas de memoria, pérdida de rendimiento, vulnerabilidades de seguridad, o errores de ejecución cuando el objeto todavía debería cumplir un rol dentro del sistema."},
+        {"text": " Por esta razón, durante el diseño del ciclo de vida de un objeto es fundamental definir claramente los estados válidos y las transiciones permitidas entre ellos."},
+        {"text": " Relación con la comparación de estados"},
+        {"text": ""},
+        {"text": "Dado que el comportamiento de un objeto depende de su estado, en muchas situaciones resulta necesario comparar objetos para determinar si se encuentran en el mismo estado o en estados equivalentes. Esta necesidad aparece, por ejemplo, cuando se desea verificar si dos objetos representan la misma información o si pueden considerarse funcionalmente equivalentes dentro del sistema."}],
+            "subinfo": []
           }
         },
         {
           "id": 24,
           "titulo": "2.4. ¿Cómo comparar objetos?",
-          "subtitulo": "Se podría considerar que dos objetos pueden considerarse equivalentes cuando los valores relevantes de sus atributos representan la misma información dentro del dominio del problema (Robillard, 2019).",
+          "subtitulo": "Se podría considerar que dos objetos pueden considerarse equivalentes cuando los valores relevantes de sus atributos representan la misma información dentro del dominio del problema.",
           "img": {
             "tipo": "IMAGEN",
             "url": "assets/main/fundamentos/igualdad-objetos.jpg"
           },
           "contenido": {
-            "data": [{"text": "Dado que el estado de un objeto está determinado por los valores de sus atributos, comparar objetos implica analizar si sus estados son iguales o equivalentes. En otras palabras, dos objetos pueden considerarse equivalentes cuando los valores relevantes de sus atributos representan la misma información dentro del dominio del problema (Robillard, 2019).\nCuando se comparan objetos del mismo tipo, es posible distinguir dos formas principales de comparación:  Igualdad por identidad Dos objetos son iguales si se refieren exactamente a la misma instancia en memoria. En este caso no se comparan los atributos del objeto, sino la referencia o dirección de memoria donde se encuentra almacenado.\n Equivalencia por estado Dos objetos son equivalentes cuando sus atributos tienen valores iguales o equivalentes, aunque se trate de instancias diferentes en memoria. En este caso los objetos representan la misma información dentro del sistema, aunque no sean el mismo objeto.\n Un ejemplo común es el de objetos que representan productos manufacturados. Dos computadoras o dos automóviles del mismo modelo pueden tener exactamente las mismas características, por lo que son equivalentes, aunque cada uno sea un objeto físico distinto.\n Comparación de objetos en software  En muchos lenguajes de programación, las variables que representan objetos no contienen directamente al objeto, sino una referencia al lugar de memoria donde este se encuentra almacenado.\n En el caso de Java, las variables de tipo objeto almacenan referencias. Por esta razón, cuando se utiliza el operador == para comparar dos variables de objeto, lo que realmente se compara es si ambas referencias apuntan a la misma dirección de memoria."}],            "subinfo": []
+            "data": [{"text": "Dado que el estado de un objeto está determinado por los valores de sus atributos, comparar objetos implica analizar si sus estados son iguales o equivalentes. En otras palabras, dos objetos pueden considerarse equivalentes cuando los valores relevantes de sus atributos representan la misma información dentro del dominio del problema."},
+        {"text": "Cuando se comparan objetos del mismo tipo, es posible distinguir dos formas principales de comparación:  Igualdad por identidad Dos objetos son iguales si se refieren exactamente a la misma instancia en memoria. En este caso no se comparan los atributos del objeto, sino la referencia o dirección de memoria donde se encuentra almacenado."},
+        {"text": " Equivalencia por estado Dos objetos son equivalentes cuando sus atributos tienen valores iguales o equivalentes, aunque se trate de instancias diferentes en memoria. En este caso los objetos representan la misma información dentro del sistema, aunque no sean el mismo objeto."},
+        {"text": " Un ejemplo común es el de objetos que representan productos manufacturados. Dos computadoras o dos automóviles del mismo modelo pueden tener exactamente las mismas características, por lo que son equivalentes, aunque cada uno sea un objeto físico distinto."},
+        {"text": " Comparación de objetos en software  En muchos lenguajes de programación, las variables que representan objetos no contienen directamente al objeto, sino una referencia al lugar de memoria donde este se encuentra almacenado."},
+        {"text": " En el caso de Java, las variables de tipo objeto almacenan referencias. Por esta razón, cuando se utiliza el operador == para comparar dos variables de objeto, lo que realmente se compara es si ambas referencias apuntan a la misma dirección de memoria."}],
+            "subinfo": []
           }
         }
       ]
@@ -81,13 +105,18 @@
       "url": "assets/main/ing-software.jpg"
     },
     "contenido": {
-      "data": [{"text": "El estado no es solo un tema de codificación; su correcta gestión debe planificarse desde las primeras etapas del ciclo de vida del software (SDLC)."}],      "subinfo": [
+      "data": [{"text": "El estado no es solo un tema de codificación; su correcta gestión debe planificarse desde las primeras etapas del ciclo de vida del software (SDLC)."}],
+      "subinfo": [
         {
           "id": 31,
           "titulo": "3.1. El estado de objeto en el diseño de software",
           "subtitulo": "El diseño del estado de un objeto debe basarse en abstracciones que representen comportamientos relevantes del sistema, en lugar de depender directamente de la secuencia lineal de los casos de uso.",
           "contenido": {
-            "data": [{"text": "Diseño basado en objetos y no en flujos de ejecución Durante el diseño de software, los objetos y módulos del sistema se identifican a partir de los requisitos, los modelos del dominio y las responsabilidades que deben cumplir. Este proceso no necesariamente sigue el orden de los casos de uso; en su lugar, primero se definen los componentes necesarios y posteriormente se integran dentro de una arquitectura coherente (Bruegge & Dutoit, 2002).\n Relación entre estados y comportamiento del sistema El comportamiento del sistema en tiempo de ejecución depende del modelo dinámico, el cual está formado por instancias de objetos cuyos estados determinan el estado global del sistema. Por ello, los estados de los objetos deben definirse cuidadosamente para evitar condiciones no previstas que generen comportamientos inesperados (Bruegge & Dutoit, 2002).\n Uso de estados abstractos para manejar complejidad Para manejar la gran cantidad de posibles estados concretos, el diseño utiliza estados abstractos, que agrupan múltiples configuraciones de atributos en categorías significativas para el dominio del problema. Esto permite razonar sobre el comportamiento del sistema sin considerar todas las combinaciones posibles de valores.\n Estados abstractos como problema de diseño Robillard (2019) señala que definir estados abstractos efectivos también es un desafío de diseño. Si los estados definidos no facilitan el análisis del comportamiento del sistema ni su integración con otros componentes, pueden convertirse en una fuente de complejidad difícil de detectar."}],            "subinfo": []
+            "data": [{"text": "Diseño basado en objetos y no en flujos de ejecución Durante el diseño de software, los objetos y módulos del sistema se identifican a partir de los requisitos, los modelos del dominio y las responsabilidades que deben cumplir. Este proceso no necesariamente sigue el orden de los casos de uso; en su lugar, primero se definen los componentes necesarios y posteriormente se integran dentro de una arquitectura coherente."},
+        {"text": " Relación entre estados y comportamiento del sistema El comportamiento del sistema en tiempo de ejecución depende del modelo dinámico, el cual está formado por instancias de objetos cuyos estados determinan el estado global del sistema. Por ello, los estados de los objetos deben definirse cuidadosamente para evitar condiciones no previstas que generen comportamientos inesperados."},
+        {"text": " Uso de estados abstractos para manejar complejidad Para manejar la gran cantidad de posibles estados concretos, el diseño utiliza estados abstractos, que agrupan múltiples configuraciones de atributos en categorías significativas para el dominio del problema. Esto permite razonar sobre el comportamiento del sistema sin considerar todas las combinaciones posibles de valores."},
+        {"text": " Estados abstractos como problema de diseño Robillard (2019) señala que definir estados abstractos efectivos también es un desafío de diseño. Si los estados definidos no facilitan el análisis del comportamiento del sistema ni su integración con otros componentes, pueden convertirse en una fuente de complejidad difícil de detectar."}],
+            "subinfo": []
           }
         },
         {
@@ -99,7 +128,13 @@
             "url": "assets/main/ciclo-software.jpg"
           },
           "contenido": {
-            "data": [{"text": "El estado no es solo un tema de codificación; su correcta gestión debe planificarse desde las primeras etapas del ciclo de vida del software (SDLC): - Análisis: se identifican los objetos del dominio y sus posibles estados   relevantes.\n- Diseño: se definen los estados abstractos y las transiciones utilizando   diagramas de estado (Bruegge & Dutoit, 2002).\n- Implementación: se codifica la lógica que permite los cambios de estado,   asegurando que no se alcancen estados no definidos.\n- Pruebas: se diseñan casos para verificar que los objetos transitan   correctamente por su ciclo de vida.\n- Mantenimiento: comprender el modelo de estados es crucial para modificar el   sistema sin introducir errores.\nUn buen diseño del estado desde el inicio evita costosas correcciones tardías."}],            "subinfo": []
+            "data": [{"text": "El estado no es solo un tema de codificación; su correcta gestión debe planificarse desde las primeras etapas del ciclo de vida del software (SDLC): - Análisis: se identifican los objetos del dominio y sus posibles estados   relevantes."},
+        {"text": "- Diseño: se definen los estados abstractos y las transiciones utilizando   diagramas de estado."},
+        {"text": "- Implementación: se codifica la lógica que permite los cambios de estado, asegurando que no se alcancen estados no definidos."},
+        {"text": "- Pruebas: se diseñan casos para verificar que los objetos transitan   correctamente por su ciclo de vida."},
+        {"text": "- Mantenimiento: comprender el modelo de estados es crucial para modificar el   sistema sin introducir errores."},
+        {"text": "Un buen diseño del estado desde el inicio evita costosas correcciones tardías."}],
+            "subinfo": []
           }
         }
       ]
@@ -114,25 +149,34 @@
       "url": "assets/main/modelado-obj.jpg"
     },
     "contenido": {
-      "data": [{"text": "El modelado permite visualizar y proteger la dinámica de los objetos antes de su implementación física."}],      "subinfo": [
+      "data": [{"text": "El modelado permite visualizar y proteger la dinámica de los objetos antes de su implementación física."}],
+      "subinfo": [
         {
           "id": 41,
           "titulo": "4.1. Representación del estado en un objeto",
           "subtitulo": "El estado se materializa en los atributos del objeto, y su integridad se protege mediante encapsulamiento.",
           "contenido": {
-            "data": [{"text": "Los atributos (o variables de instancia) son los contenedores del estado de un objeto. El principio de encapsulamiento dicta que estos atributos deben ser privados y solo accesibles o modificables a través de métodos públicos, evitando que agentes externos corrompan el estado (Bruegge & Dutoit, 2002).\nUn concepto relacionado es la equivalencia de objetos: dos objetos son equivalentes si sus estados son iguales, aunque sean instancias distintas.\nPor ello, en lenguajes como Java, se debe implementar el método equals() para comparar atributos, en lugar del operador == que solo compara identidad (direcciones de memoria) (Robillard, 2019)."}],            "subinfo": []
+            "data": [{"text": "Los atributos (o variables de instancia) son los contenedores del estado de un objeto. El principio de encapsulamiento dicta que estos atributos deben ser privados y solo accesibles o modificables a través de métodos públicos, evitando que agentes externos corrompan el estado."},
+            {"text": "Un concepto relacionado es la equivalencia de objetos: dos objetos son equivalentes si sus estados son iguales, aunque sean instancias distintas."},
+            {"text": "Por ello, en lenguajes como Java, se debe implementar el método equals() para comparar atributos, en lugar del operador == que solo compara identidad (direcciones de memoria)."}],
+            "subinfo": []
           }
         },
         {
           "id": 42,
           "titulo": "4.2. Modelado de estados con UML",
           "subtitulo": "El diagrama de máquina de estados de UML es la herramienta estándar para visualizar el ciclo de vida de un objeto.",
-          "img": {
-            "tipo": "DIAGRAMA",
-            "mermaid": "stateDiagram-v2\n    [*] --> Apagada\n    Apagada --> Encendida : presionarBotonEncendido()\n    \n    Encendida --> EsperandoSeleccion : encendidoCompleto()\n    \n    EsperandoSeleccion --> PreparandoCafe : seleccionarCafe()\n    EsperandoSeleccion --> Apagada : presionarBotonApagado()\n    \n    PreparandoCafe --> Sirviendo : cafeListo()\n    PreparandoCafe --> EsperandoSeleccion : errorPreparacion()\n    \n    Sirviendo --> EsperandoSeleccion : cafeServido()\n    \n    %% Estado de mantenimiento opcional\n    EsperandoSeleccion --> Mantenimiento : activarMantenimiento()\n    Mantenimiento --> EsperandoSeleccion : finalizarMantenimiento()"
-          },
+          "img":{"url":"assets/main/modelado/diag-estados.png", "tipo": "IMAGEN"},
           "contenido": {
-            "data": [{"text": "Dado que la documentación del software suele ser estática, se requieren diagramas que comuniquen la dinámica de los objetos. El diagrama de máquina de estados de UML permite representar los estados posibles de un objeto, las transiciones entre ellos, los eventos que las disparan y las condiciones (guardias) que deben cumplirse (Bruegge & Dutoit, 2002; Robillard, 2019).\nSus elementos principales son: - Estado: rectángulo con esquinas redondeadas que contiene el nombre del estado.\n- Estado inicial: círculo sólido relleno.\n- Estado final: círculo rodeado por otro círculo (ojo de buey).\n- Transición: línea con flecha que conecta dos estados, etiquetada con el   evento, la guardia [condición] y la acción / efecto.\nEste modelado es esencial para diseñar y comunicar el comportamiento dinámico antes de la implementación."}],            "subinfo": []
+            "data": [{"text": "Dado que la documentación del software suele ser estática, se requieren diagramas que comuniquen la dinámica de los objetos. El diagrama de máquina de estados de UML permite representar los estados posibles de un objeto, las transiciones entre ellos, los eventos que las disparan y las condiciones (guardias) que deben cumplirse (Bruegge & Dutoit, 2002; Robillard, 2019)."},
+              {"text": "Sus elementos principales son:"},
+              {"text":" - Estado: rectángulo con esquinas redondeadas que contiene el nombre del estado."},
+              {"text": "- Estado: rectángulo con esquinas redondeadas que contiene el nombre del estado."},
+              {"text": "- Estado inicial: círculo sólido relleno."},
+              {"text": "- Estado final: círculo rodeado por otro círculo (ojo de buey)."},
+              {"text": "- Transición: línea con flecha que conecta dos estados, etiquetada con el   evento, la guardia [condición] y la acción / efecto."},
+              {"text": "Este modelado es esencial para diseñar y comunicar el comportamiento dinámico antes de la implementación."}],
+            "subinfo": []
           }
         }
       ]
@@ -140,73 +184,104 @@
   },
   {
     "id": 5,
-    "titulo": "5. DISEÑO AVANZADO: PATRONES Y ANTIPATRONES",
-    "subtitulo": "Existen patrones de diseño que resuelven problemas comunes relacionados con la gestión del estado de los objetos.",
+    "titulo": "5. ESTADO DE OBJETO APLICADO A DISEÑO: PATRONES Y ANTIPATRONES",
+    "subtitulo": "Existen patrones relacionados a los estados de un objetos que son comunes en el diseño que pueden ser beneficiosos o perjudiciales.",
     "img": {
       "tipo": "IMAGEN",
       "url": "assets/main/patrones.jpg"
     },
     "contenido": {
-      "data": [{"text": "Los patrones de diseño representan conocimiento acumulado sobre soluciones efectivas a problemas recurrentes en la ingeniería de software. Más allá de su impacto directo en la estructura del código, influyen significativamente en los procesos de desarrollo al mejorar la organización del software, facilitar la comunicación entre desarrolladores y aumentar la robustez de los sistemas.\n Patrones como State, Null Object y Flyweight permiten gestionar de forma más clara el comportamiento dependiente del estado, evitando estructuras condicionales complejas y reduciendo la probabilidad de errores. Sin embargo, también introducen riesgos si se aplican de manera innecesaria, ya que pueden incrementar la complejidad del diseño.\n Por esta razón, la correcta aplicación de patrones requiere experiencia y criterio de diseño. Cuando se utilizan adecuadamente, constituyen una herramienta fundamental para desarrollar sistemas mantenibles, extensibles y de alta calidad dentro de los procesos modernos de ingeniería de software.\n Basado en Robillard (2019), los siguientes patrones son fundamentales:"}],      "subinfo": [
+      "data": [{"text": "Los patrones de diseño representan conocimiento acumulado sobre soluciones efectivas a problemas recurrentes en la ingeniería de software. Más allá de su impacto directo en la estructura del código, influyen significativamente en los procesos de desarrollo al mejorar la organización del software, facilitar la comunicación entre desarrolladores y aumentar la robustez de los sistemas."},
+        {"text": " Patrones como State, Null Object y Flyweight permiten gestionar de forma más clara el comportamiento dependiente del estado, evitando estructuras condicionales complejas y reduciendo la probabilidad de errores. Sin embargo, también introducen riesgos si se aplican de manera innecesaria, ya que pueden incrementar la complejidad del diseño."},
+        {"text": " Por esta razón, la correcta aplicación de patrones requiere experiencia y criterio de diseño. Cuando se utilizan adecuadamente, constituyen una herramienta fundamental para desarrollar sistemas mantenibles, extensibles y de alta calidad dentro de los procesos modernos de ingeniería de software."}
+      ],
+      "subinfo": [
         {
           "id": 51,
           "titulo": "5.1. Patrones de diseño relacionados con el estado",
           "subtitulo": "Existen patrones de diseño que resuelven problemas comunes relacionados con la gestión del estado de los objetos.",
           "contenido": {
-            "data": [{"text": "Basado en Robillard (2019), los siguientes patrones son fundamentales. La inclusión de una evaluación para cada patrón muestra un análisis crítico necesario para un diseño robusto."}],            "subinfo": [
+            "data": [{"text": "los siguientes patrones son fundamentales. La inclusión de una evaluación para cada patrón muestra un análisis crítico necesario para un diseño robusto."}],
+            "subinfo": [
               {
                 "id": 511,
                 "titulo": "5.1.1. Patrón State",
                 "subtitulo": "El objeto cambia su comportamiento dinámicamente según su estado interno.",
+                "img": {"tipo": "IMAGEN", "url": "assets/main/patrones/patron-state.png"},
                 "contenido": {
-                  "data": [{"text": "Encapsula estados en clases que implementan una interfaz común, eliminando condicionales complejos (Gamma et al., 1994).\n Evaluación: Puede aumentar el número de clases, por lo que solo se recomienda si el comportamiento varía significativamente."}],                  "img": null,
-                  "subinfo": []
-                }
+                  "data": [
+                    {"text": "Encapsula estados en clases que implementan una interfaz común, eliminando condicionales complejos (Gamma et al., 1994)."},
+                    {"text": "Puede aumentar el número de clases, por lo que solo se recomienda si el comportamiento varía significativamente."}
+                  ]
+                },
+                "subinfo": []
               },
               {
                 "id": 512,
                 "titulo": "5.1.2. Patrón Singleton",
                 "subtitulo": "Garantiza una única instancia para gestionar un estado global centralizado.",
+                "img": {"tipo": "IMAGEN", "url": "assets/main/patrones/patron-singleton.png"},
                 "contenido": {
-                  "data": [{"text": "Restringe la creación de objetos mediante constructores privados para asegurar consistencia (Bruegge & Dutoit, 2002).\nEvaluación: Considerado frecuentemente un antipatrón por dificultar el testeo unitario y ocultar dependencias."}],                  "img": null,
-                  "subinfo": []
-                }
+                  "data": [
+                    {"text": "Restringe la creación de objetos mediante constructores privados para asegurar consistencia."},
+                    {"text": "Considerado frecuentemente un antipatrón por dificultar el testeo unitario y ocultar dependencias."}
+                  ]
+                },
+                "subinfo": []
               },
               {
                 "id": 513,
                 "titulo": "5.1.3. Patrón Objeto Nulo (Null Object)",
                 "subtitulo": "Proporciona un objeto con comportamiento neutro para evitar referencias nulas.",
+                "img": {"tipo": "IMAGEN", "url": "assets/main/patrones/patron-null-object.png"},
                 "contenido": {
-                  "data": [{"text": "Sustituye el chequeo de 'null' por una instancia que no realiza acción, mejorando la robustez (Robillard, 2019).\nEvaluación: Debe usarse con cuidado para no silenciar errores que deberían ser detectados por el sistema."}],                  "img": null,
-                  "subinfo": []
-                }
+                  "data": [
+                    {"text": "Sustituye el chequeo de \"null\" por una instancia que no realiza acción, mejorando la robustez."},
+                    {"text": "Debe usarse con cuidado para no silenciar errores que deberían ser detectados por el sistema."}
+                  ]
+                },
+                "subinfo": []
               },
               {
                 "id": 514,
                 "titulo": "5.1.4. Patrón Flyweight (Peso Ligero)",
                 "subtitulo": "Comparte estados intrínsecos entre múltiples objetos para ahorrar memoria.",
+                "img": {"tipo": "IMAGEN", "url": "assets/main/patrones/patron-flyweight.png"},
                 "contenido": {
-                  "data": [{"text": "Divide el estado en compartido (intrínseco) y contextual (extrínseco) para optimizar recursos (Gamma et al., 1994).\nEvaluación: Añade complejidad técnica en la gestión del estado extrínseco."}],                  "img": null,
-                  "subinfo": []
-                }
+                  "data": [
+                    {"text": "Divide el estado en compartido (intrínseco) y contextual (extrínseco) para optimizar recursos (Gamma et al., 1994)."},
+                    {"text": "Añade complejidad técnica en la gestión del estado extrínseco."}
+                  ]
+                },
+                "subinfo": []
               },
               {
                 "id": 515,
                 "titulo": "5.1.5. Patrón Result",
                 "subtitulo": "Encapsula el resultado de una operación (éxito/fallo) como un estado explícito.",
+                "img": {"tipo": "IMAGEN", "url": "assets/main/patrones/patron-result.png"},
                 "contenido": {
-                  "data": [{"text": "Evita excepciones para control de flujo devolviendo un objeto que indica el estado del proceso (Robillard, 2019).\nEvaluación: Excelente para APIs legibles, aunque requiere que el desarrollador sea disciplinado al evaluar el resultado."}],                  "img": null,
-                  "subinfo": []
-                }
+                  "data": [
+                    {"text": "Evita excepciones para control de flujo devolviendo un objeto que indica el estado del proceso."},
+                    {"text": "Excelente para APIs legibles, aunque requiere que el desarrollador sea disciplinado al evaluar el resultado.",
+                    "img":{"tipo":"VIDEO", "url": "https://www.youtube.com/watch?v=XT3Aq-QYPdM"}}
+                  ]
+                },
+                "subinfo": []
               },
               {
                 "id": 516,
-                "titulo": "5.1.6. Máquinas de Estado Finitas (FSM)",
+                "titulo": "5.1.6. Patrón Máquinas de Estado Finitas (FSM)",
                 "subtitulo": "Modelo formal de estados y transiciones activadas por eventos definidos.",
+                "img": {"tipo": "IMAGEN", "url": "assets/main/patrones/patron-fsm.png"},
                 "contenido": {
-                  "data": [{"text": "Proporciona un marco rígido y seguro para sistemas donde el orden de eventos es crítico (Bruegge & Dutoit, 2002).\nEvaluación: Su implementación manual puede ser tediosa; se recomienda el uso de librerías especializadas."}],                  "img": null,
-                  "subinfo": []
-                }
+                  "data": [
+                    {"text": "Proporciona un marco rígido y seguro para sistemas donde el orden de eventos es crítico."},
+                    {"text": "Su implementación manual puede ser tediosa; se recomienda el uso de librerías especializadas.",
+                    "img":{"tipo":"VIDEO", "url": "https://www.youtube.com/watch?v=sTyRxey86Jw"}}
+                  ]
+                },
+                "subinfo": []
               }
             ]
           }
@@ -216,42 +291,59 @@
           "titulo": "5.2. Antipatrones de estado",
           "subtitulo": "Ciertas prácticas comunes, aunque atractivas, pueden conducir a problemas graves en la gestión del estado.",
           "contenido": {
-            "data": [{"text": "Robillard (2019) y la experiencia en ingeniería de software identifican varios antipatrones que deben evitarse para no comprometer la calidad del sistema."}],            "subinfo": [
+            "data": [{"text": "Robillard (2019) y la experiencia en ingeniería de software identifican varios antipatrones que deben evitarse para no comprometer la calidad del sistema."}],
+            "subinfo": [
               {
                 "id": 521,
-                "titulo": "5.2.1. Anti-patrón de Caché de Estado",
+                "titulo": "5.2.1. Anti-patrón de Cache de Estado",
                 "subtitulo": "Guardar copias locales de estados ajenos, causando redundancia.",
+                "img": {"tipo": "IMAGEN", "url": "assets/main/patrones/antipatron-cache-estado.png"},
                 "contenido": {
-                  "data": [{"text": "Viola la 'fuente única de verdad', provocando que los datos se desincronicen (Robillard, 2019).\nEvaluación: Debe eliminarse en favor de consultas directas o sistemas de notificación de cambios (Observer)."}],                  "img": null,
-                  "subinfo": []
-                }
+                  "data": [
+                    {"text": "Viola la \"fuente única de verdad\", provocando que los datos se desincronicen."},
+                    {"text": "Debe eliminarse en favor de consultas directas o sistemas de notificación de cambios como el patrón Observer."}
+                  ]
+                },
+                "subinfo": []
               },
               {
                 "id": 522,
-                "titulo": "5.2.2. Mal manejo de la ausencia (Null)",
+                "titulo": "5.2.2. Anti-patrón mal uso de Null",
                 "subtitulo": "Uso de null sin estrategia, provocando fallos en tiempo de ejecución.",
+                "img": {"tipo": "IMAGEN", "url": "assets/main/patrones/antipatron-null.png"},
                 "contenido": {
-                  "data": [{"text": "La falta de estados explícitos para 'vacío' genera errores de puntero nulo (Bruegge & Dutoit, 2002).\nEvaluación: Obligatorio transicionar hacia el uso de tipos 'Optional' o el patrón Null Object."}],                  "img": null,
-                  "subinfo": []
-                }
+                  "data": [
+                    {"text": "La falta de estados explícitos para \"vacío\" genera errores de puntero nulo."},
+                    {"text": "Se recomienda transicionar hacia el uso de tipos Optional o el patrón Null Object."}
+                  ]
+                },
+                "subinfo": []
               },
               {
                 "id": 523,
                 "titulo": "5.2.3. Estado Global o Variable Global",
                 "subtitulo": "Acceso y modificación libre del estado desde cualquier punto del código.",
+                "img": {"tipo": "IMAGEN", "url": "assets/main/patrones/antipatron-estado-global.png"},
                 "contenido": {
-                  "data": [{"text": "Rompe el encapsulamiento y genera acoplamientos peligrosos y difíciles de depurar (Gamma et al., 1994).\nEvaluación: Se debe reemplazar por inyección de dependencias para controlar el ciclo de vida del estado."}],                  "img": null,
-                  "subinfo": []
-                }
+                  "data": [
+                    {"text": "Rompe el encapsulamiento y genera acoplamientos peligrosos y difíciles de depurar (Gamma et al., 1994)."},
+                    {"text": "Se debe reemplazar por inyección de dependencias para controlar el ciclo de vida del estado."}
+                  ]
+                },
+                "subinfo": []
               },
               {
                 "id": 524,
                 "titulo": "5.2.4. Obsesión Primitiva",
                 "subtitulo": "Usar tipos básicos (int, string) para representar estados con reglas de negocio.",
+                "img": {"tipo": "IMAGEN", "url": "assets/main/patrones/antipatron-obsesion-primitiva.png"},
                 "contenido": {
-                  "data": [{"text": "Impide la validación por tipos y permite estados inválidos en el sistema (Robillard, 2019).\nEvaluación: Se recomienda el uso de Enums o Value Objects para dar semántica y seguridad al estado."}],                  "img": null,
-                  "subinfo": []
-                }
+                  "data": [
+                    {"text": "Impide la validación por tipos y permite estados inválidos en el sistema."},
+                    {"text": "Se recomienda el uso de Enums o Value Objects para dar semántica y seguridad al estado."}
+                  ]
+                },
+                "subinfo": []
               }
             ]
           }
@@ -259,12 +351,36 @@
         {
           "id": 53,
           "titulo": "5.3. Impacto de los patrones de diseño en los procesos de software",
-          "subtitulo": "Los patrones de diseño no solo afectan la estructura del código, sino que también influyen directamente en los procesos de desarrollo de software.\nProporcionan soluciones reutilizables que afectan la forma en que los equipos analizan, diseñan, implementan y mantienen los sistemas.",
+          "subtitulo": "Los patrones de diseño no solo afectan la estructura del código, sino que también influyen directamente en los procesos de desarrollo de software.",
+          
           "contenido": {
-            "data": [{"text": "Impacto 1: Mejora en la organización y mantenibilidad del código Patrones como el State permiten distribuir comportamientos en clases especializadas en lugar de utilizar estructuras condicionales complejas.\nEsto mejora la claridad del código y facilita el mantenimiento del sistema cuando se agregan nuevos estados o comportamientos (Gamma et al., 1994).\n Impacto en el proceso: - Reduce errores durante la fase de mantenimiento.\n- Facilita la extensión del sistema sin modificar código existente.\n- Promueve principios como el principio de abierto/cerrado.\n Riesgo: Puede aumentar el número de clases y generar sobreingeniería si se utiliza cuando el comportamiento no es lo suficientemente complejo.\n Impacto 2: Mejora en la comunicación dentro del equipo de desarrollo Los patrones de diseño proporcionan un lenguaje común entre desarrolladores.\nCuando un equipo identifica que un componente implementa un patrón como State o Flyweight, todos los desarrolladores comprenden rápidamente la estructura del diseño y su intención.\n Impacto en el proceso: - Mejora la colaboración entre desarrolladores.\n- Facilita revisiones de código y diseño.\n- Reduce el tiempo necesario para comprender componentes complejos.\n Oportunidad: Establece estándares de diseño dentro del equipo, mejorando la consistencia del software desarrollado.\n Impacto 3: Influencia en la calidad y robustez del sistema Patrones como Null Object o Result permiten manejar estados especiales o errores de manera explícita, reduciendo fallos en tiempo de ejecución relacionados con referencias nulas o manejo incorrecto de excepciones.\n Impacto en el proceso: - Mejora la robustez del sistema.\n- Reduce errores en pruebas y producción.\n- Facilita el diseño de pruebas unitarias más claras.\n Riesgo: Si se utilizan incorrectamente, estos patrones pueden ocultar errores que deberían ser detectados por el sistema.\n Relación con procesos de ingeniería de software: Estos impactos se observan principalmente en las actividades de diseño e implementación del software, donde los desarrolladores aplican patrones para organizar la arquitectura del sistema y mejorar la calidad del código.\n\nDesde la perspectiva del modelo de ingeniería de software Essence (SEMAT), los patrones influyen en:  Alfa: Software System Los patrones afectan la estructura interna y la modularidad del sistema.\n Espacio de Actividad: Implement the System Los desarrolladores aplican patrones durante la codificación para estructurar el comportamiento del sistema.\n Competencia: Development El conocimiento y uso adecuado de patrones forma parte de las competencias técnicas de los desarrolladores, permitiendo construir soluciones más mantenibles y escalables."}],            "subinfo": []
-          }
-        }
-      ]
+            "data": [{
+              "text": "Proporcionan soluciones reutilizables que afectan la forma en que los equipos analizan, diseñan, implementan y mantienen los sistemas."},
+              {"text": "Impacto 1: Mejora en la organización y mantenibilidad del código Patrones como el State permiten distribuir comportamientos en clases especializadas en lugar de utilizar estructuras condicionales complejas."},
+              {"text": "Esto mejora la claridad del código y facilita el mantenimiento del sistema cuando se agregan nuevos estados o comportamientos (Gamma et al., 1994)."},
+              {"text": " Impacto en el proceso: - Reduce errores durante la fase de mantenimiento."},
+              {"text": "- Facilita la extensión del sistema sin modificar código existente."},
+              {"text": "- Promueve principios como el principio de abierto/cerrado."},
+              {"text": " Riesgo: Puede aumentar el número de clases y generar sobreingeniería si se utiliza cuando el comportamiento no es lo suficientemente complejo."},
+              {"text": " Impacto 2: Mejora en la comunicación dentro del equipo de desarrollo Los patrones de diseño proporcionan un lenguaje común entre desarrolladores."},
+              {"text": "Cuando un equipo identifica que un componente implementa un patrón como State o Flyweight, todos los desarrolladores comprenden rápidamente la estructura del diseño y su intención."},
+              {"text": " Impacto en el proceso: - Mejora la colaboración entre desarrolladores."},
+              {"text": "- Facilita revisiones de código y diseño."},
+              {"text": "- Reduce el tiempo necesario para comprender componentes complejos."},
+              {"text": " Oportunidad: Establece estándares de diseño dentro del equipo, mejorando la consistencia del software desarrollado."},
+              {"text": " Impacto 3: Influencia en la calidad y robustez del sistema Patrones como Null Object o Result permiten manejar estados especiales o errores de manera explícita, reduciendo fallos en tiempo de ejecución relacionados con referencias nulas o manejo incorrecto de excepciones."},
+              {"text": " Impacto en el proceso: - Mejora la robustez del sistema."},
+              {"text": "- Reduce errores en pruebas y producción."},
+              {"text": "- Facilita el diseño de pruebas unitarias más claras."},
+              {"text": " Riesgo: Si se utilizan incorrectamente, estos patrones pueden ocultar errores que deberían ser detectados por el sistema."},
+              {"text": " Relación con procesos de ingeniería de software: Estos impactos se observan principalmente en las actividades de diseño e implementación del software, donde los desarrolladores aplican patrones para organizar la arquitectura del sistema y mejorar la calidad del código."},
+              {"text": "Desde la perspectiva del modelo de ingeniería de software Essence (SEMAT), los patrones influyen en:  Alfa: Software System Los patrones afectan la estructura interna y la modularidad del sistema."},
+              {"text": " Espacio de Actividad: Implement the System Los desarrolladores aplican patrones durante la codificación para estructurar el comportamiento del sistema."},
+              {"text": " Competencia: Development El conocimiento y uso adecuado de patrones forma parte de las competencias técnicas de los desarrolladores, permitiendo construir soluciones más mantenibles y escalables."}],
+                  "subinfo": []
+                }
+              }
+            ]
     }
   },
   {
@@ -276,7 +392,8 @@
       "url": "assets/main/conclusiones.png"
     },
     "contenido": {
-      "data": [{"text": "El estado de un objeto es el núcleo del comportamiento dinámico en el software orientado a objetos. Comprender la diferencia entre estado concreto y abstracto permite manejar la complejidad y centrarse en lo relevante. El modelado con diagramas de máquina de estados de UML es esencial para visualizar y comunicar el ciclo de vida de los objetos, evitando estados no definidos que son fuente de errores. En el ciclo de vida del software, la gestión del estado debe considerarse desde el análisis hasta el mantenimiento. Finalmente, la aplicación de patrones como State, Singleton, Null Object y Flyweight, así como la prevención de antipatrones como el cache de estado y el mal manejo de null, son prácticas indispensables para construir software robusto, mantenible y libre de fallos, tal como lo señalan Bruegge y Dutoit (2002) y Robillard (2019)."}],      "subinfo": []
+      "data": [{"text": "El estado de un objeto es el núcleo del comportamiento dinámico en el software orientado a objetos. Comprender la diferencia entre estado concreto y abstracto permite manejar la complejidad y centrarse en lo relevante. El modelado con diagramas de máquina de estados de UML es esencial para visualizar y comunicar el ciclo de vida de los objetos, evitando estados no definidos que son fuente de errores. En el ciclo de vida del software, la gestión del estado debe considerarse desde el análisis hasta el mantenimiento. Finalmente, la aplicación de patrones como State, Singleton, Null Object y Flyweight, así como la prevención de antipatrones como el cache de estado y el mal manejo de null, son prácticas indispensables para construir software robusto, mantenible y libre de fallos, tal como lo señalan Bruegge y Dutoit (2002) y Robillard (2019)."}],
+      "subinfo": []
     }
   },
   {
@@ -288,38 +405,52 @@
       "url": "assets/main/actividades.png"
     },
     "contenido": {
-      "data": [{"text": "Los participantes deberán buscar las palabras en la sopa de letras y asociarlas con su definición. Los estudiantes recibirán una hoja con la sopa de letras y las definiciones desordenadas."}],      "subinfo": [
+      "data": [{"text": "Los participantes deberán buscar las palabras en la sopa de letras y asociarlas con su definición. Los estudiantes recibirán una hoja con la sopa de letras y las definiciones desordenadas."}],
+      "subinfo": [
         {
           "id": 71,
           "titulo": "7.1. Sopa de letras: Conceptos clave",
           "subtitulo": "Esta sopa de letras tiene como objetivo reforzar el vocabulario técnico y los conceptos fundamentales relacionados con el estado de los objetos, los patrones de diseño y los antipatrones vistos en la presentación. Los participantes deberán buscar las palabras en la sopa de letras y asociarlas con su definición."
-          
         },
         {
           "id": 72,
           "titulo": "7.2. Identificacio partes modelo de estados.",
-          "subtitulo": " Ejercicio identificacion seciones de modelo de estados para uml"
-        },
-        {
-          "id": 73,
-          "titulo": "7.2. Ejercicio Trenecito",
-          "subtitulo": "Esta actividad permite a los participantes experimentar de primera mano cómo el mal manejo del estado (antipatrones) puede introducir errores y cómo los patrones de diseño pueden corregirlos. Se simula un pequeño sistema de un trenecito turístico que recorre varias estaciones y lleva un control de pasajeros.",
-          "contenido": {
-            "data": [{"text": "Se proporcionará a los estudiantes un fragmento de código JavaScript (ejecutable en la consola del navegador) que implementa el objeto `Trenecito` con una serie de malas prácticas. A partir de ahí, los estudiantes deberán explorar el comportamiento, identificar los antipatrones presentes y luego refactorizar el código aplicando los patrones adecuados.\n Escenario: El trenecito tiene una capacidad máxima de 20 pasajeros. Realiza un recorrido por 5 estaciones: Estación Central, Parque, Museo, Mirador y Terminal. En cada estación pueden subir y bajar pasajeros. El trenecito debe conocer: - Cuántos pasajeros lleva actualmente.\n- Si está en movimiento o detenido.\n- La última estación visitada.\n- El máximo de pasajeros que ha tenido en el viaje.\n Código inicial (con antipatrones): Se entregará un código con los siguientes problemas (los antipatrones se explicarán a los estudiantes):\n1. Estado global: Las variables que controlan el trenecito son globales y accesibles desde cualquier parte.\n2. Obsesión primitiva: El estado \"en movimiento\" se representa con un número (0 = detenido, 1 = avanzando, 2 = retrocediendo) en lugar de un tipo enumerado.\n3. Mal manejo de null: La última estación visitada se inicializa como `null` y no se trata adecuadamente, causando posibles errores si se accede antes de la primera visita.\n4. Cache de estado: Se guarda una copia local del máximo de pasajeros que no se actualiza correctamente cuando bajan pasajeros.\n5. Falta de encapsulamiento: Los atributos son públicos, permitiendo modificaciones externas que pueden dejar al objeto en estados inconsistentes (ej: cambiar el número de pasajeros directamente sin control).\n Estados del trenecito: - Detenido: El trenecito está en una estación, pueden subir/bajar pasajeros.\n- Avanzando: El trenecito se dirige a la siguiente estación, no pueden subir/bajar.\n- Retrocediendo: El trenecito regresa a la estación anterior (solo en ciertas rutas).\n Preguntas guía para la actividad: 1. Exploración inicial: Ejecuta el código y simula un recorrido: en la Estación Central suben 5, avanzan al Parque, suben 3, avanzan al Museo, bajan 2, etc. ¿Qué valores muestran los atributos? ¿Hay algún comportamiento inesperado? 2. Identificación de antipatrones: ¿Qué problemas observas en el diseño? ¿Cuáles de los antipatrones vistos se manifiestan? 3. Impacto en el ciclo de vida: ¿Cómo afectan estos antipatrones a la confiabilidad del software? ¿Qué riesgos introducen? 4. Aplicación de patrones:\n   - Para la representación del estado de movimiento, ¿qué patrón podríamos usar? (State)\n   - Para evitar el uso de `null` en la última estación, ¿qué patrón sería adecuado? (Null Object)\n   - Para garantizar que solo exista un trenecito y controlar su estado global, ¿qué patrón aplicarías? (Singleton, aunque con cuidado)\n   - Para manejar el máximo de pasajeros sin desincronización, ¿cómo podríamos rediseñar? 5. Refactorización: Propón una nueva versión del código que corrija los problemas aplicando los patrones mencionados. Puedes usar pseudocódigo o Java/JavaScript.\n Resultados esperados: - Los estudiantes deberían proponer un `enum EstadoMovimiento { DETENIDO, AVANZANDO, RETROCEDIENDO }`.\n- Usar el patrón State para encapsular comportamientos (opcional, se puede simplificar con condicionales si no es complejo).\n- Implementar un objeto `EstacionNula` que herede de una interfaz `Estacion` para evitar null.\n- Aplicar Singleton para la clase `Trenecito` (o al menos asegurar una única instancia mediante un gestor).\n- Eliminar el cache innecesario calculando el máximo bajo demanda o actualizándolo correctamente en un método `actualizarMaximo()`.\n Preguntas de reflexión final: - ¿Qué ventajas ofrece el uso de tipos enumerados frente a números para representar estados? - ¿Cómo mejora la robustez el patrón Null Object? - ¿Por qué el estado global es perjudicial para el mantenimiento y las pruebas? "}],            "subinfo": []
-          }
+          "subtitulo": " Ejercicio identificacion seciones y comprtamiento de un modelo de estados para uml"
         }
       ]
     }
   },
   {
     "id": 8,
-    "subtitulo": "Fuentes bibliográficas y notas de clase utilizadas para la elaboración del documento.",
+    "titulo": "Referencias",
+    "subtitulo": "Fuentes bibliográficas y materiales utilizados para la elaboración del documento.",
     "img": {
       "tipo": "IMAGEN",
       "url": "assets/main/referencias.jpg"
     },
     "contenido": {
-      "data": [{"text": "- Bruegge, B., & Dutoit, A. H. (2002). Ingeniería de software orientado a   objetos. Pearson Educación.\n- Robillard, M. P. (2019). Introduction to Software Design with Java.\n  Springer International Publishing.\n  https://doi.org/10.1007/978-3-030-24094-3 -  Máquinas de Estado: El patrón para eliminar los \"If\" anidados   https://www.youtube.com/watch?v=sTyRxey86Jw - Patrón Result: Por qué lo necesitas y cómo se programa   https://www.youtube.com/watch?v=XT3Aq-QYPdM"}],      "subinfo": []
+      "data": [{"text":"Fuentes bibliográficas y materiales utilizados para la elaboración del documento."}],
+      "subinfo": [  {
+          "id": 81,
+          "titulo": "Castillo López, M. I. (2025). 2.4 Estado de Objeto",
+          "subtitulo": "Castillo López, M. I. (2025). 2.4 Estado de Objeto. Curso Diseño de Software, Licenciatura en Ingeniería de Software, Universidad Autónoma de la Ciudad de México, Plantel San Lorenzo Tezonco.. https://drive.google.com/file/d/1xoR0q02yp-ViZ_eYE1ZUfb8haQQXUROr/view"
+        },
+        {
+          "id": 82,
+          "titulo": "Patrones de diseño. (s.f.). Refactoring.Guru",
+          "subtitulo": "Patrones de diseño. (s.f.). Refactoring.Guru. https://refactoring.guru/es/design-patterns"
+        },
+        {
+          "id": 83,
+          "titulo": "Máquinas de Estado: El patrón para eliminar los 'if' anidados. (s.f.)",
+          "subtitulo": "Máquinas de Estado: El patrón para eliminar los 'if' anidados. (s.f.).Del Código a la Arquitectura. [Video]. YouTube.. https://www.youtube.com/watch?v=sTyRxey86Jw"
+        },
+        {
+          "id": 84,
+          "titulo": "Patrón Result: Por qué lo necesitas y cómo se programa. (s.f.).",
+          "subtitulo": "Patrón Result: Por qué lo necesitas y cómo se programa. (s.f.).Del Código a la Arquitectura. [Video]. YouTube.. https://www.youtube.com/watch?v=XT3Aq-QYPdM"
+        }
+      ]
     }
   }
 ]
