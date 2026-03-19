@@ -1,11 +1,12 @@
 export class Informacion {
 
-    constructor(id, titulo, subtitulo, img, datos) {
+    constructor(id, titulo, subtitulo, resumen, img, datos) {
         this.id = id;
         this.titulo = titulo;
         this.subtitulo = subtitulo;
+        this.resumen = resumen// [[{text,img,claves}]];
         this.img = img;
-        this.datos = datos; // { data [{text,img}], subinfo }
+        this.datos = datos; // { data [{text,img,claves}], subinfo }
     }
 
     static desdeJSON(json) {
@@ -13,6 +14,7 @@ export class Informacion {
             json.id,
             json.titulo,
             json.subtitulo,
+            json.resumen ?? null,
             json.img ?? null,
             json.contenido? {
                 data: json.contenido?.data ?? null,

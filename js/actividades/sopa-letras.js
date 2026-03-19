@@ -96,6 +96,7 @@ function render(data) {
     // Renderizar pistas
     data.forEach(item => {
         const li = document.createElement('li');
+        li.className= "text-lg"
         li.id = `hint-${item.word}`;
         li.innerHTML = `<span class="font-bold text-blue-500">•</span> ${item.hint}`;
         cluesUl.appendChild(li);
