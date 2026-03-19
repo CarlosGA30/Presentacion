@@ -1,151 +1,59 @@
+// Fondo parallax solo en nivel principal
+const getParallaxBG = (index, isNested) => {
+    if (isNested) return null;
+    if ((index + 1) % 2 === 0) {
+        let bg = document.createElement("div");
+        bg.className = "absolute inset-0 bg-fixed bg-cover bg-center opacity-30 pointer-events-none";
+        bg.style.backgroundImage = "url('assets/index-paralax.jpg')";
+        return bg;
+    }
+    return null;
+};
+
+// Helper: Extraer ID de YouTube (versión global para el modal)
+const getYouTubeId = (url) => {
+    if (!url) return null;
+    const patterns = [
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/)([^&\n?#]+)/,
+        /youtube\.com\/shorts\/([^&\n?#]+)/
+    ];
+    for (const pattern of patterns) {
+        const match = url.match(pattern);
+        if (match?.[1]) return match[1];
+    }
+    return null;
+};
+
+// Helper: Generar thumbnail de YouTube
+const getYouTubeThumbnail = (videoId, quality = 'hqdefault') => {
+    return `https://img.youtube.com/vi/${videoId}/${quality}.jpg`;
+};
+
+// Helper: Obtener parámetro start de URL de YouTube
+const getYouTubeStartTime = (url) => {
+    if (!url) return 0;
+    // Formato ?t=120 o &t=120 o ?start=120
+    const match = url.match(/[?&](?:t|start)=(\d+)/);
+    return match ? parseInt(match[1], 10) : 0;
+};
+
 // ============================================
 // FUNCIÓN PRINCIPAL MODIFICADA
 // ============================================
 export function renderContent(dataList, container, isNested = false, globalIndex = 0) {
-    
-    // Helper: Extraer ID de video de YouTube
-    const getYouTubeId = (url) => {
-        if (!url) return null;
-        const patterns = [
-            /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/)([^&\n?#]+)/,
-            /youtube\.com\/shorts\/([^&\n?#]+)/
-        ];
-        for (const pattern of patterns) {
-            const match = url.match(pattern);
-            if (match?.[1]) return match[1];
-        }
-        return null;
-    };
-
-    // Helper: Generar thumbnail de YouTube
-    const getYouTubeThumbnail = (videoId, quality = 'hqdefault') => {
-        return `https://img.youtube.com/vi/${videoId}/${quality}.jpg`;
-    };
-
-    // Fondo parallax solo en nivel principal
-    const getParallaxBG = (index) => {
-        if (isNested) return null;
-        if ((index + 1) % 2 === 0) {
-            let bg = document.createElement("div");
-            bg.className = "absolute inset-0 bg-fixed bg-cover bg-center opacity-30 pointer-events-none";
-            bg.style.backgroundImage = "url('assets/index-paralax.jpg')";
-            return bg;
-        }
-        return null;
-    };
-
-    // Función para crear el HTML de imagen/video con botón de ampliar
-    const createMediaWithZoom = (src, alt, tipo = 'IMAGEN') => {
-        const zoomBtn = `
-            <button type="button" 
-                    class="absolute top-2 right-2 z-20 bg-white/90 hover:bg-white text-gray-700 hover:text-blue-600 
-                           rounded-full p-2 shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 
-                           focus:ring-blue-400 opacity-0 group-hover:opacity-100"
-                    onclick="event.stopPropagation(); openMediaModal('${encodeURIComponent(src)}', '${encodeURIComponent(alt)}', '${tipo}')"
-                    aria-label="Ampliar"
-                    title="Ampliar">
-                <i class="bi bi-arrows-fullscreen text-lg"></i>
-            </button>
-        `;
-        
-        // Overlay de play para videos
-        const playOverlay = tipo === 'VIDEO' ? `
-            <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
-                <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                    <i class="bi bi-play-fill text-3xl text-gray-800 ml-1"></i>
-                </div>
-            </div>
-        ` : '';
-
-        if (tipo === 'DIAGRAMA') {
-            return `
-                <div class="relative group w-full h-full">
-                    <div class="mermaid w-full h-full object-cover hover:scale-105 transition-transform duration-500 cursor-zoom-in"
-                         onclick="openMediaModal(this, '${encodeURIComponent(alt)}', 'DIAGRAMA')">
-                        ${src}
-                    </div>
-                    ${zoomBtn}
-                </div>
-            `;
-        }
-        
-        if (tipo === 'VIDEO') {
-            const videoId = getYouTubeId(src);
-            const thumbnail = videoId ? getYouTubeThumbnail(videoId) : 'assets/cargando.svg';
-            return `
-                <div class="relative group w-full h-full">
-                    <img src="${thumbnail}" 
-                         alt="${alt}" 
-                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-500 cursor-zoom-in"
-                         onerror="this.src='assets/cargando.svg'">
-                    ${playOverlay}
-                    ${zoomBtn}
-                </div>
-            `;
-        }
-        
-        // IMAGEN por defecto
-        return `
-            <div class="relative group w-full h-full">
-                <img src="${src}" 
-                     alt="${alt}" 
-                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-500 cursor-zoom-in"
-                     onerror="this.src='assets/cargando.svg'"
-                     onclick="openMediaModal('${encodeURIComponent(src)}', '${encodeURIComponent(alt)}', 'IMAGEN')">
-                ${zoomBtn}
-            </div>
-        `;
-    };
 
     dataList.forEach((item, localIndex) => {
         let globalIdx = globalIndex + localIndex;
 
         // Contenedor principal de la sección
         let div_n = document.createElement('seccion');
-        div_n.className = 'relative pb-10 pt-10';
+        div_n.className = 'relative  mb-10 mt-10 ';
         div_n.id = `secc-${item.id}`;
 
         let section = document.createElement('section');
-        section.className = "max-w-7xl mx-auto bg-white overflow-hidden rounded-xl shadow-md border border-gray-100 relative z-10";
+        section.className = " mb-10 mt-10  max-w-7xl mx-auto bg-white overflow-hidden rounded-xl shadow-md border border-gray-100 relative z-10";
         
-        // Preparar contenido multimedia
-        let contenidoMedia = null;
-        
-        if (item.img?.tipo) {
-            const tipo = item.img.tipo.toUpperCase();
-            const src = tipo === 'DIAGRAMA' ? item.img.mermaid : (item.img.url || 'assets/cargando.svg');
-            contenidoMedia = createMediaWithZoom(src, item.titulo, tipo);
-        }
-        
-        let img_cont = contenidoMedia ? `
-            <div class="w-full md:w-1/3 h-48 md:h-64 rounded-lg overflow-hidden shrink-0 bg-gray-200 ring-1 ring-gray-200 relative">
-                ${contenidoMedia}
-            </div>
-        ` : '';
-
-        let btn_detalle = item.datos ? `
-            <button onclick="window.toggleSection(${item.id})"
-                    class="group flex items-center text-sm font-semibold text-gray-500 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-md px-2 py-1">
-                <span id="btn-text-${item.id}">Ver más información</span>
-                <svg id="icon-${item.id}" class="w-4 h-4 ml-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-            </button>
-        ` : '';
-
-        // HEADER
-        let headerHTML = `
-            <div class="p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start relative z-10 bg-white">
-                ${img_cont}
-                <div class="flex-1 space-y-4">
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-900">${item.titulo}</h2>
-                        <p class="text-2xl text-blue-500 font-medium mt-1">${item.subtitulo || ''}</p>
-                    </div>
-                    ${btn_detalle}
-                </div>
-            </div>
-        `;
+        let headerHTML = construirHeader(item)
 
         // DETAILS - generación corregida de detalles
         let detallesHTML = '';
@@ -165,13 +73,20 @@ export function renderContent(dataList, container, isNested = false, globalIndex
                 ` : '';
                 
                 return `
-                <div class="md:col-span-3 space-y-2">
+                <div class="md:col-span-3 space-y-1">
                     <p class="text-gray-700 leading-relaxed text-2xl">${e.text || ''}</p>
                     ${detalleMedia}
                     <div id="subinfo-${item.id}" class="mt-8 space-y-6"></div>
                 </div>
                 `;
             }).join('');
+        }else{
+            detallesHTML=`
+                <div class="md:col-span-3 space-y-1">
+                    <div id="subinfo-${item.id}" class="mt-8 space-y-6"></div>
+                </div>
+                `
+
         }
         
         let detailsHTML = `
@@ -185,7 +100,7 @@ export function renderContent(dataList, container, isNested = false, globalIndex
         section.innerHTML = headerHTML + detailsHTML;
 
         // Fondo parallax opcional
-        let parallaxBG = getParallaxBG(globalIdx);
+        let parallaxBG = getParallaxBG(globalIdx, isNested);
         if (parallaxBG) div_n.appendChild(parallaxBG);
 
         div_n.appendChild(section);
@@ -202,6 +117,129 @@ export function renderContent(dataList, container, isNested = false, globalIndex
     });
 }
 
+function construirHeader(item){
+        // Preparar contenido multimedia
+    let contenidoMedia = null;
+    
+    if (item.img?.tipo) {
+        const tipo = item.img.tipo.toUpperCase();
+        const src = tipo === 'DIAGRAMA' ? item.img.mermaid : (item.img.url || 'assets/cargando.svg');
+        contenidoMedia = createMediaWithZoom(src, item.titulo, tipo);
+    }
+    
+    let img_cont = contenidoMedia ? `
+        <div class="w-full md:w-1/3 h-48 md:h-64 rounded-lg overflow-hidden shrink-0 bg-gray-200 ring-1 ring-gray-200 relative">
+            ${contenidoMedia}
+        </div>
+    ` : '';
+
+    let btn_detalle = item.datos ? `<div class="group flex items-center justify-center text-center p-5">
+    <button onclick="window.toggleSection(${item.id})"
+        class="w-full flex items-center justify-center text-sm font-semibold text-gray-500 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-md px-2 py-2">
+        
+        <span id="btn-text-${item.id}">Ver más información</span>
+
+        <svg id="icon-${item.id}" 
+            class="w-4 h-4 ml-2 transition-transform"
+            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+</div>
+    ` : '';
+
+    // HEADER
+    let resumen=''
+    if (item.resumen?.length) {
+        resumen = item.resumen.map(e => {
+            let texto = e.text|| ''
+            e.claves.forEach(clv=>{
+                texto=texto.replace(clv, `<b class="text-black">${clv}</b>`)
+            })
+            return `<p class="leading-relaxed">${texto }</p>`
+            ;
+        }).join('');
+    }
+
+    let headerHTML = `
+        <div class="p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start relative z-10 bg-white">
+            ${img_cont}
+            <div class="flex-1 space-y-4">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900">${item.titulo}</h2>
+                    <p class="text-2xl text-blue-500 font-medium mt-1">${item.subtitulo || ''}</p>
+                    <div class="text-lg text-gray-500 font-medium mt-1">${resumen || ''}</div>
+                </div>
+            </div>
+        </div>
+        ${btn_detalle}
+    `
+    return headerHTML;
+    ;
+}
+// Función para crear el HTML de imagen/video con botón de ampliar
+function createMediaWithZoom(src, alt, tipo = 'IMAGEN'){
+    const zoomBtn = `
+        <button type="button" 
+                class="absolute top-2 right-2 z-20 bg-white/90 hover:bg-white text-gray-700 hover:text-blue-600 
+                        rounded-full p-2 shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 
+                        focus:ring-blue-400 opacity-0 group-hover:opacity-100"
+                onclick="event.stopPropagation(); openMediaModal('${encodeURIComponent(src)}', '${encodeURIComponent(alt)}', '${tipo}')"
+                aria-label="Ampliar"
+                title="Ampliar">
+            <i class="bi bi-arrows-fullscreen text-lg"></i>
+        </button>
+    `;
+    
+    // Overlay de play para videos
+    const playOverlay = tipo === 'VIDEO' ? `
+        <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
+            <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <i class="bi bi-play-fill text-3xl text-gray-800 ml-1"></i>
+            </div>
+        </div>
+    ` : '';
+
+    if (tipo === 'DIAGRAMA') {
+        return `
+            <div class="relative group w-full h-full">
+                <div class="mermaid w-full h-full object-cover hover:scale-105 transition-transform duration-500 cursor-zoom-in"
+                        onclick="openMediaModal(this, '${encodeURIComponent(alt)}', 'DIAGRAMA')">
+                    ${src}
+                </div>
+                ${zoomBtn}
+            </div>
+        `;
+    }
+    
+    if (tipo === 'VIDEO') {
+        const videoId = getYouTubeId(src);
+        const thumbnail = videoId ? getYouTubeThumbnail(videoId) : 'assets/cargando.svg';
+        return `
+            <div class="relative group w-full h-full">
+                <img src="${thumbnail}" 
+                        alt="${alt}" 
+                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-500 cursor-zoom-in"
+                        onerror="this.src='assets/cargando.svg'">
+                ${playOverlay}
+                ${zoomBtn}
+            </div>
+        `;
+    }
+    
+    // IMAGEN por defecto
+    return `
+        <div class="relative group w-full h-full">
+            <img src="${src}" 
+                    alt="${alt}" 
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-500 cursor-zoom-in"
+                    onerror="this.src='assets/cargando.svg'"
+                    onclick="openMediaModal('${encodeURIComponent(src)}', '${encodeURIComponent(alt)}', 'IMAGEN')">
+            ${zoomBtn}
+        </div>
+    `;
+};
 // ============================================
 // FUNCIÓN DE INICIALIZACIÓN DE MERMAID
 // ============================================
@@ -321,27 +359,6 @@ function createMediaModal() {
     });
 }
 
-// Helper: Extraer ID de YouTube (versión global para el modal)
-const getYouTubeId = (url) => {
-    if (!url) return null;
-    const patterns = [
-        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/)([^&\n?#]+)/,
-        /youtube\.com\/shorts\/([^&\n?#]+)/
-    ];
-    for (const pattern of patterns) {
-        const match = url.match(pattern);
-        if (match?.[1]) return match[1];
-    }
-    return null;
-};
-
-// Helper: Obtener parámetro start de URL de YouTube
-const getYouTubeStartTime = (url) => {
-    if (!url) return 0;
-    // Formato ?t=120 o &t=120 o ?start=120
-    const match = url.match(/[?&](?:t|start)=(\d+)/);
-    return match ? parseInt(match[1], 10) : 0;
-};
 
 // Abrir el modal con contenido multimedia
 window.openMediaModal = function(src, alt, tipo = 'IMAGEN') {
